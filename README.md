@@ -1,7 +1,7 @@
 # hello-world
-My first github project.
+Hola everybody, 
 
-Hola everybody, I'm crackerjackmack1. I work mostly on .html, .js, and .css files for my church groups, friends, and myself.
+I'm crackerjackmack1. I work mostly on .html, .js, and .css files for my church groups, friends, and myself.
 
 I'm setting up this github account to learn how to use the <b>#1 VCS</b> (<b>V</b>ersion <b>C</b>ontrol <b>S</b>ystem) in the world (from what I've read and heard).
 
