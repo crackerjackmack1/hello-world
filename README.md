@@ -1,13 +1,15 @@
 # hello-world
 My first github project. 
 
-Hola everybody, i'm crackerjackmack1. i mostly work on web pages, javascript, and css for my church groups, friends, and myself.
+Hola everybody, I'm crackerjackmack1. I work mostly on .html, .js, and .css files for my church groups, friends, and myself.
 
-i'm setting up this github account in an effort to learn how to use the number 1 versioning system in the world (from what i've read and heard).
+I'm setting up this github account in an effort to learn how to use the #1 version control system in the world (from what I've read and heard).
 
-i've never used github before, and i'm so tired of saving copy after copy of file modifications in an effort to keep track of errors and magic bugs that just seem to appear out of nowhere.
+I've never used github before, and I'm so tired of saving copy after copy of file modifications in an effort to keep track of errors and magic bugs that just seem to appear out of nowhere.
 
-If this makes it any easier to write, deploy and edit html pages, javascripts, stylesheets and web utilities then i've made a very good move.
+If this makes it any easier to write, deploy and edit html pages, javascripts, stylesheets and web utilities then I've made a very good move.
+
+And so we shall see, let the games begin...
 
 See ya later.
 
