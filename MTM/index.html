@@ -42,7 +42,7 @@ td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray
     margin: 15px;
 }
 .grid-container > div {text-align: center; padding: 5px; font-size: 16px; border:0px solid gray;}
-/***/.foot {position:fixed; left:0; bottom:0; width:100%; background-color:navy; color:white; text-align:center;}
+/***/.foot {position:fixed; left:0; bottom:0; width:100%; background-color:navy; color:white; text-align:left;}
 #total {font-size:16pt; font-weight:bold;}
 #stable {width:auto; margin:auto; padding:auto;}
 /***/#VERSION {text-align:center; font-size:12px; font-weight:bold; padding-top:10px; padding-bottom:10px;}
@@ -365,9 +365,9 @@ function getRowCount(){return document.getElementById(curTable).rows.length;}
 function setVersion() 
 { 
     var ver=document.querySelector('meta[name="version"]').content; 
-	var author=document.querySelector('meta[name="author"]').content; 
+    var author=document.querySelector('meta[name="author"]').content;
     document.getElementById("MYTITLE").innerHTML=ver; 
-    document.getElementById("VERSION").innerHTML="&copy; 2017, 2018, "+ver+", "+author; 
+    document.getElementById("VERSION").innerHTML="&copy;2018, "+author; 
 } 
 setVersion(); 
 </script>
