@@ -3,17 +3,17 @@
 <head>
 <title id="MYTITLE"></title>
 <meta name="generator" content="Bluefish 2.2.10" >
-<meta name="author" content="texty" >
-<meta name="date" content="2018-11-06T01:00:07-0600" >
+<meta name="author" content="J.G. McCracken">
+<meta name="date" content="2018-11-06T01:00:07-0600">
 <meta name="copyright" content="©2010, My Time Machine (MTM) is the physical and intellectual property of Johnny G. McCracken, All rights reserved.">
 <meta name="keywords" content="">
-<meta name="description" content="A personal project/job time tracking utility">
+<meta name="description" content="A web-based personal project/job time tracking utility">
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
 <meta http-equiv="content-style-type" content="text/css">
 <meta http-equiv="expires" content="0">
-<meta name="Version" content="MTM 1.3.3-1g" />
+<meta name="version" content="MTM 1.3.3-1g" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
@@ -364,9 +364,10 @@ function getRowCount(){return document.getElementById(curTable).rows.length;}
 /* DISPLAY VERSION NUMBER */ 
 function setVersion() 
 { 
-    var ver=document.querySelector('meta[name="Version"]').content; 
+    var ver=document.querySelector('meta[name="version"]').content; 
+	var author=document.querySelector('meta[name="author"]').content; 
     document.getElementById("MYTITLE").innerHTML=ver; 
-    document.getElementById("VERSION").innerHTML="&copy; 2017, 2018, "+ver; 
+    document.getElementById("VERSION").innerHTML="&copy; 2017, 2018, "+ver+", "+author; 
 } 
 setVersion(); 
 </script>
