@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title id="MYTITLE"></title>
+<meta name="generator" content="Bluefish 2.2.10" >
+<meta name="author" content="J.G. McCracken">
+<meta name="date" content="2018-11-06T01:00:07-0600">
+<meta name="copyright" content="©2010, My Time Machine (MTM) is the physical and intellectual property of Johnny G. McCracken, All rights reserved.">
+<meta name="keywords" content="">
+<meta name="description" content="A web-based personal project/job time tracking utility">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="expires" content="0">
+<meta name="version" content="MTM 1.3.3-1g" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+/*<![CDATA[*/
+html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; padding:auto; box-sizing:border-box; text-align:center;}
+input {font-size:12pt;}
+input[type="button"] {width:100px;}
+table {border:1px solid black; width:95%;}
+td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray; border-colapse:colapse;}
+.tablename {background-color: navy; color:white; font-weight:bold;}
+.subhead {background-color:white; color:black; font-weight:bold}
+.point {cursor:pointer;}
+
+.item1 {grid-area: header;}
+.item2 {grid-area: start-time;}
+.item3 {grid-area: stop-time;}
+.item4 {grid-area: total-hours;}
+.item5 {grid-area: add-new-list;}
+.item6 {grid-area: add-to-list;}
+.grid-container {
+	/***/height:100%;
+    display: grid;
+    grid-template-areas: 'header header''start-time stop-time''total-hours total-hours''add-new-list add-to-list';
+    grid-gap: 0px;
+    padding: 0px;
+    margin: 15px;
+}
+.grid-container > div {text-align: center; padding: 5px; font-size: 16px; border:0px solid gray;}
+/***/.foot {position:fixed; left:0; bottom:0; width:100%; background-color:navy; color:white; text-align:center;}
+#total {font-size:16pt; font-weight:bold;}
+#stable {width:auto; margin:auto; padding:auto;}
+/***/#VERSION {text-align:center; font-size:12px; font-weight:bold; padding-top:10px; padding-bottom:10px;}
+
+@media print{
+	html * {font-size:3vw;}
+	body {margin;0px; padding:0px;}
+	table{margin:0px;}
+	table, tr, td {border: 1px solid black;}
+	tr {page-break-inside:avoid;}
+	#VERSION {display:none;}
+	.tablename {background-color: white; color:black;}
+	.description {width:400px;}
+	/***/.grid-container, div.foot {display:none;}
+}
+/*]]>*/
+</style>
+
+</head>
+
+<body onload="getTotalTime();">
+
+<div id="mtm" class="grid-container">
+	<div class="item1"><b>My Time Machine<sup>&copy;</sup></b></div>
+	<div class="item2">
+		<b>Start Time</b><sup><small>&#64;</small></sup><br />
+		<input id="startTime" type="time" value="08:00" onchange="getTotalTime();" />
+	</div>
+	<div class="item3">
+		<b>Stop Time</b><sup><small>&#64;</small></sup><br />
+		<input id="stopTime" type="time" value="17:00" onchange="getTotalTime();" />
+	</div>
+	<div class="item4">
+		<p id="total"></p>
+		<b>Hours</b>
+	</div>
+	<div class="item5" style="padding-bottom:50px;">
+		<input type="button" value="Add Table" onclick="addTimeTable(); this.blur();" />
+	</div>
+	<div class="item6" style="vertical-align:top;">
+		<input type="button" value="Add Line" onclick="addTimeLine(); this.blur();" /><br />
+		<div style="text-align:left; margin-top:5px">
+		<input type="radio" id="btn-0" name="add-a-row" checked /><label for="btn-0">To top</label><br />
+		<input type="radio" id="btn-1" name="add-a-row" /><label for="btn-1">To bottom</label>
+		</div>
+	</div>
+</div>
+
+<div id="stable"></div>
+
+<!--  ***BEGIN VERSIONING  -->
+<div class="foot"><p id="VERSION"></p></div>
+<!--  ***END VERSIONING  -->
+
+<script type="text/javascript" charset="UTF-8"> 
+/* Position of row to be added */
+var addRowToTop=document.getElementsByName("add-a-row") 
+/* Name of currrent table having focus */
+var curTable=""; 
+/* References to "time" <input> controls */
+var time1=document.getElementById("startTime"); 
+var time2=document.getElementById("stopTime"); 
+/* Reference to cell where total hours are displayed */
+var decimaltime=document.getElementById("total"); 
+/* Div where tables are created */
+var stable=document.getElementById("stable"); 
+
+/* CALCULATE TOTAL HOURS FOR A ROW */ 
+function adjTimeLine(e) 
+{ 
+	var table=document.getElementById(curTable); 
+	var c2=table.rows[e.rowIndex].cells[2]; 
+	var c3=table.rows[e.rowIndex].cells[3]; 
+	var c4=table.rows[e.rowIndex].cells[4]; 
+	updateCells(); 
+	var t1=c2.innerHTML.split(":"); 
+	var t2=c3.innerHTML.split(":"); 
+	var m1=Number(t1[0] * 60) + Number(t1[1]); 
+	var m2=Number(t2[0] * 60) + Number(t2[1]); 
+	c4.innerHTML = (parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1); 
+	sumTableHoursCol();
+	return;
+	function updateCells() {c2.innerHTML=time1.value; c3.innerHTML=time2.value;} 
+}
+
+/* SUM TOTAL OF COLUMN "HRS." */ 
+function sumTableHoursCol() 
+{ 
+    var table=document.getElementById(curTable); 
+    var f=document.getElementById(table.id+"_footer"); 
+    var total=0; 
+    var tds=table.getElementsByClassName("totalhours"); 
+    for (var i=0; i<tds.length; i++) {total+=Number(tds[i].innerHTML);} 
+    f.innerHTML="<b>"+total.toFixed(1)+"</b>"; 
+}
+
+/* 
+ * ADD NEW TIME TABLE
+ * Data cells: |✔| Desc | Start Time | Stop Time | Hrs.|
+ * Definitions:
+ * ✔: When unchecked deletes the table or row
+ * Desc: Briefly describes the job or task
+ * Start: Time the job or task began
+ * Stop: Time the job or task ended
+ * Hrs: Hours spent on job/task (tenths of an hour)
+ */ 
+function addTimeTable() 
+{ 
+    /* Column header variables */ 
+    var s0="Description",s1="Start",s2="Stop",s3="Hrs"; 
+	/* Prompt for Table name */ 
+	var tablename=prompt("Enter a name for the new list","My Time Machine"); 
+    if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;} 
+	/* Create Table */ 
+	var table=document.createElement("TABLE"); 
+	table.setAttribute("cellspacing","0"); 
+	table.setAttribute("cellpadding","5"); 
+	table.id=curTable="Table_"+(getTableCount()+1); 
+	table.style.padding="auto"; 
+	table.style.margin="auto"; 
+	table.style.marginTop="1.5em"; 
+	table.style.marginBottom="1.5em";  
+	table.ontouchstart=function(){curTable=this.id;} 
+	table.onmouseover=function(){curTable=this.id;} 
+	stable.appendChild(table); 
+	/* Table name header */ 
+	var row=table.insertRow(0); 
+	var th=row.insertCell(0); 
+	th.className="tablename point"; 
+	th.setAttribute("colspan","5"); 
+	th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";} 
+	th.innerHTML=tablename; 
+	/* Column headers */ 
+	row=table.insertRow(1); 
+	/* Checkbox */ 
+	var td0=row.insertCell(0);  
+	td0.style.width="0.5cm"; 
+	td0.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />'; 
+	/* Description */ 
+	var td1=row.insertCell(1); 
+	td1.className="subhead"; 
+	td1.style.width="auto"; 
+	td1.style.textAlign="left"; 
+	td1.innerHTML="Description"; 
+	/* Start time */ 
+	var td2=row.insertCell(2); 
+	td2.className="subhead"; 
+	td2.style.width="1.5cm"; 
+    td2.style.textAlign="center"; 
+    td2.innerHTML="Start"; 
+	/* Stop time */ 
+	var td3=row.insertCell(3); 
+	td3.className="subhead";  
+	td3.style.width="1.5cm"; 
+    td3.style.textAlign="center"; 
+    td3.innerHTML="Stop"; 
+	/* Hrs & 10ths */ 
+	var td4=row.insertCell(4); 
+	td4.className="subhead";  
+	td4.style.width="1.0cm"; 
+    td4.style.textAlign="center"; 
+    td4.innerHTML="Hrs."; 
+	/* Footer row */ 
+	var footer=table.createTFoot(); 
+    row=footer.insertRow(0); 
+    /* Cell for "Total:" */ 
+    var cell0=row.insertCell(0); 
+	cell0.className="footer"; 
+    cell0.setAttribute("colspan","4"); 
+    cell0.style.textAlign="right"; 
+	cell0.style.borderRight="none"; 
+    cell0.innerHTML="<b>Total: </b>"; 
+    /* Cell for sum total hours */ 
+    var cell1=row.insertCell(1); 
+	cell0.className="footer"; 
+    cell1.style.textAlign="right"; 
+	cell1.style.paddingRight="5px"; 
+	cell1.style.borderLeft="none"; 
+    cell1.setAttribute("id", curTable+"_footer"); 
+    addTimeLine(); 
+}
+
+/* ADD NEW ROW TO SELECTED TIME TABLE */
+function addTimeLine(ndx) 
+{ 
+    /* Reference to the current table */ 
+    var table=document.getElementById(curTable); 
+    /* Variable "rc" for row count */
+    var rc=getRowCount()+1; 
+    /* Create new data row */ 
+    var row="";
+    /* Insert new data row at top */
+    if(arguments.length==0 && addRowToTop[0].checked) {row=table.insertRow(2);}
+    else if(arguments.length==0 && addRowToTop[1].checked) {row=table.insertRow(getRowCount()-1);}
+    /* Insert new data row below hilighted row */
+    else {row=table.insertRow(ndx);} 
+    /* Checkbox cell */ 
+    var td0=row.insertCell(0); 
+    td0.innerHTML='<input type="checkbox" checked onchange="deleteMyRow(this)" />'; 
+    /* Description */ 
+    var td1=row.insertCell(1); 
+	td1.className="description point"; 
+	td1.style.textAlign="left"; 
+	td1.ondblclick=function(){this.innerHTML=prompt("Enter description",this.innerHTML);} 
+	td1.innerHTML="Job #" + (rc-3);
+    /* Start time */ 
+    var td2=row.insertCell(2); 
+	td2.className="point"; 
+    td2.style.textAlign="center"; 
+	td2.ondblclick=function(){adjTimeLine(this.parentNode);} 
+	td2.innerHTML=time1.value; 
+    /* Stop time */ 
+    var td3=row.insertCell(3); 
+	td3.className="point"; 
+    td3.style.textAlign="center"; 
+	td3.ondblclick=function(){adjTimeLine(this.parentNode);} 
+	td3.innerHTML=time2.value; 
+    /* Hrs & 10ths */ 
+    var td4=row.insertCell(4); 
+	td4.className="totalhours point"; 
+	td4.style.textAlign="right"; 
+	td4.style.paddingRight="5px"; 
+    td4.ontouchstart=function(){hiLightRow(this.parentNode)}
+    td4.ontouchcancel=function(){unhiLightRow(this.parentNode)} 
+	td4.ondblclick=function(){insertRowAt(this.parentNode)}  
+    td4.onmouseover=function(){hiLightRow(this.parentNode)}
+    td4.onmouseout=function(){unhiLightRow(this.parentNode)} 
+    td4.innerHTML=decimaltime.innerHTML;
+    /* Update Totals */ 
+    sumTableHoursCol(); 
+} 
+
+/* Insert row below selected row index */ 
+function insertRowAt(e)
+{
+    var table=document.getElementById(curTable);
+    var n=e.rowIndex;
+	addTimeLine(n+1);
+    unhiLightRow(e);
+} 
+
+/* Remove highlight color at selected row index */ 
+function unhiLightRow(e) 
+{
+    var table=document.getElementById(curTable);
+	table.rows[e.rowIndex].style.backgroundColor=""; 
+} 
+
+/* Set highlight color on selected row */ 
+function hiLightRow(e) 
+{
+    var table=document.getElementById(curTable);
+	table.rows[e.rowIndex].style.backgroundColor="yellow"; 
+}
+
+/*
+ * Calculate total time spent in hours & tenths of 
+ * an hour & report result in <p id="total"> tag
+ */ 
+function getTotalTime() 
+{ 
+	/*
+	 * Reference the "time" <input> elements and split them into string arrays
+	 * t1[0] & t2[0] contain hours
+	 * t1[1] & t2[1] contain minutes
+	 */ 
+	var t1=time1.value.split(":"); 
+	var t2=time2.value.split(":"); 
+
+	/* Alias <p> tag */ 
+	var p=document.getElementById("total"); 
+
+	/* Alias' to hold strings converted to Number() for calculations */ 
+	var m1=Number(t1[0] * 60) + Number(t1[1]); 
+	var m2=Number(t2[0] * 60) + Number(t2[1]); 
+	var result=(parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1); 
+
+	/* Displays calculated result in the <p> tag */ 
+	p.innerHTML=result; 
+
+	return result; 
+}
+
+/*
+ * CONVERT MINUTES TO 10ths OF AN HOUR
+ * Range 0.0 to 1.0
+ * 9 intervals of 5 minutes each
+ * 2 intervals of 2 miutes each
+ */ 
+function getTenths(m) 
+{ 
+	var tenths=""; 
+		 if (m>=0  && m<=2) {tenths="0.0"} 
+	else if (m>=3  && m<=8) {tenths="0.1"} 
+	else if (m>=9  && m<=14){tenths="0.2"} 
+	else if (m>=15 && m<=20){tenths="0.3"} 
+	else if (m>=21 && m<=26){tenths="0.4"} 
+	else if (m>=27 && m<=32){tenths="0.5"} 
+	else if (m>=33 && m<=38){tenths="0.6"} 
+	else if (m>=39 && m<=44){tenths="0.7"} 
+	else if (m>=45 && m<=50){tenths="0.8"} 
+	else if (m>=51 && m<=56){tenths="0.9"} 
+	else if (m>=57 && m<=59){tenths="1.0"} 
+	return Number(tenths); 
+} 
+
+/* DELETE TABLE */ 
+function deleteMyTable() { var child=document.getElementById(curTable); stable.removeChild(child); } 
+
+/* DELETE ROW */ 
+function deleteMyRow(e) { document.getElementById(curTable).deleteRow(e.parentNode.parentNode.rowIndex); sumTableHoursCol(); } 
+
+/* RETURN VISIBLE TABLES COUNT */ 
+function getTableCount() {return document.getElementsByTagName("TABLE").length;} 
+
+/* RETURN ROW COUNT IN CURRENT TABLE */ 
+function getRowCount(){return document.getElementById(curTable).rows.length;}
+
+/* DISPLAY VERSION NUMBER */ 
+function setVersion() 
+{ 
+    var ver=document.querySelector('meta[name="version"]').content; 
+	var author=document.querySelector('meta[name="author"]').content; 
+    document.getElementById("MYTITLE").innerHTML=ver; 
+    document.getElementById("VERSION").innerHTML="&copy; 2017, 2018, "+ver+", "+author; 
+} 
+setVersion(); 
+</script>
+
+</body>
+
+</html>
