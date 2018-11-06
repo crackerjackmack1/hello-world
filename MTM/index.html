@@ -34,7 +34,7 @@ td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray
 .item5 {grid-area: add-new-list;}
 .item6 {grid-area: add-to-list;}
 .grid-container {
-	/***/height:100%;
+    height:100%;
     display: grid;
     grid-template-areas: 'header header''start-time stop-time''total-hours total-hours''add-new-list add-to-list';
     grid-gap: 0px;
@@ -42,10 +42,10 @@ td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray
     margin: 15px;
 }
 .grid-container > div {text-align: center; padding: 5px; font-size: 16px; border:0px solid gray;}
-/***/.foot {position:fixed; left:0; bottom:0; width:100%; background-color:navy; color:white; text-align:left;}
+.foot {position:fixed; left:0; bottom:0; width:95%; background-color:navy; color:white;}
 #total {font-size:16pt; font-weight:bold;}
 #stable {width:auto; margin:auto; padding:auto;}
-/***/#VERSION {text-align:center; font-size:12px; font-weight:bold; padding-top:10px; padding-bottom:10px;}
+#VERSION {text-align:left; font-size:12px; font-weight:bold; padding-top:10px; padding-bottom:10px;}
 
 @media print{
 	html * {font-size:3vw;}
@@ -56,7 +56,7 @@ td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray
 	#VERSION {display:none;}
 	.tablename {background-color: white; color:black;}
 	.description {width:400px;}
-	/***/.grid-container, div.foot {display:none;}
+	.grid-container, div.foot {display:none;}
 }
 /*]]>*/
 </style>
