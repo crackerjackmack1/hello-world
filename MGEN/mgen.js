@@ -64,7 +64,7 @@
       rcandlelightlabel.innerHTML=(!rLang?"Candlelight Ceremony":"Ceremonia de las Noche de Vela")+"&#58;"
       rdestemaillabel.innerHTML=(!rLang?"Retreat Email":"Retiro de correo electrónico")+"&#58;"
       createbtn.innerHTML="&emsp;"+(!rLang?"Create Message":"Crear un Mensaje")+"&emsp;"
-      MSGS_btn.innerHTML="&emsp;"+(!rLang?"CLOSE":"CERCA")+"&emsp;"
+      MSGS_btn.innerHTML="&emsp;"+(!rLang?"CLOSE":"CERRAR")+"&emsp;"
     }
     
     function outPutMsg()
@@ -164,7 +164,7 @@
       + "<br />"
       + "Our Mother of Perpetual Help Retreat Center<br />"
       + "3417 West Little York Rd. <br />Houston, TX 77091</i><br /><br />"
-      + (!rLang?"Upon entering the driveway of the retreat center you will be directed to the parking area, then escorted or directed to the retreat center where you will meet other family members, members of the ACTS Community, and friends. ":"Al ingresar a la entrada del centro de retiros, se le dirigirá al área de estacionamiento, luego se lo escoltará o se lo dirigirá al centro de retiros donde se encontrará con otros miembros de la familia, miembros de la comunidad de ACTS y amigos. ")
+      + (!rLang?"Upon entering the driveway of the retreat center you will be directed to the parking area, then escorted or directed to the retreat center where you will meet other family members, members of the ACTS Community, and friends. ":"Al ingresar a la entrada del centro de retiros, se le dirigirá al área de estacionamiento, luego se le escoltará o se le dirigirá al centro de retiros donde se encontrará con otros miembros de la familia, miembros de la comunidad de ACTS y amigos. ")
       + "<br /><br />"
       + (!rLang?"After preparing in song and prayer, we will greet the retreatants as they process through the room. ":"Después de prepararnos para cantar y orar, saludaremos a los participantes mientras procesan a través de la sala. ")
       + (!rLang?"Please make every effort to be there for ":"Por favor, haga todo lo posible para estar allí con ")
