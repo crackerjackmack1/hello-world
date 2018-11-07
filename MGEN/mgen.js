@@ -56,12 +56,12 @@
       rfirstname.placeholder=(!rLang?"First name":"Nombre")
       rlastname.placeholder=(!rLang?"Last name":"Apellido")
       rcontactlabel.innerHTML=(!rLang?"Contact":"Contacto")+"&#58;"
-      rcontact.placeholder=(!rLang?"First name":"Nombre")
+      rcontact.placeholder=(!rLang?"First name":"Nombre contacto")
       rpartnerlabel.innerHTML=(!rLang?"Prayer Partner":(rgender?"Compañero":"Compañera")+" de Oración")+"&#58;"
       rpartner.placeholder=(!rLang?"Full name":"Nombre completo")
       rpartnerphone.placeholder=(!rLang?"Phone":"Teléfono")
       rpartneremail.placeholder=(!rLang?"Email":"Correo electrónico")
-      rcandlelightlabel.innerHTML=(!rLang?"Candlelight Ceremony":"Ceremonia Noche de Vela")+"&#58;"
+      rcandlelightlabel.innerHTML=(!rLang?"Candlelight Ceremony":"Ceremonia de las Noche de Vela")+"&#58;"
       rdestemaillabel.innerHTML=(!rLang?"Retreat Email":"Retiro de correo electrónico")+"&#58;"
       createbtn.innerHTML="&emsp;"+(!rLang?"Create Message":"Crear un Mensaje")+"&emsp;"
       MSGS_btn.innerHTML="&emsp;"+(!rLang?"CLOSE":"CERCA")+"&emsp;"
@@ -154,7 +154,7 @@
       + (!rLang?" until after the retreat is over!":" hasta que termine el retiro!")
       + "<br /><br />"
       + "<b>"
-      + (!rLang?"Candlelight Ceremony":"Ceremonia Noche De Vela")
+      + (!rLang?"Candlelight Ceremony":"Ceremonia de las Noche De Vela")
       + "<br /></b><i>"
       + getDayName(rdate.getDay()+2)+", "
       + getMonthName(rdate.getMonth())+" "+(rdate.getDate()+2)
@@ -167,7 +167,7 @@
       + (!rLang?"Upon entering the driveway of the retreat center you will be directed to the parking area, then escorted or directed to the retreat center where you will meet other family members, members of the ACTS Community, and friends. ":"Al ingresar a la entrada del centro de retiros, se le dirigirá al área de estacionamiento, luego se lo escoltará o se lo dirigirá al centro de retiros donde se encontrará con otros miembros de la familia, miembros de la comunidad de ACTS y amigos. ")
       + "<br /><br />"
       + (!rLang?"After preparing in song and prayer, we will greet the retreatants as they process through the room. ":"Después de prepararnos para cantar y orar, saludaremos a los participantes mientras procesan a través de la sala. ")
-      + (!rLang?"Please make every effort to be there for ":"Por favor, haga todo lo posible para estar allí para ")
+      + (!rLang?"Please make every effort to be there for ":"Por favor, haga todo lo posible para estar allí con ")
       + rfirstname+".<br /><br />"
       + (!rLang?"Again, please help keep this surprise a secret... ":"Nuevamente, por favor, ayuda a mantener esta sorpresa en secreto ... ")
       + "<br /><br />";
