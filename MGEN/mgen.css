@@ -50,7 +50,7 @@ div#VERSION{font-size: 7pt;}
 
 @media all and (orientation:landscape)
 {
-  body{margin:50px; padding:50px;}
+  body{margin:10px; padding:10px;}
 
   /* Selectors here implimented when width is greater than height. */
   #maintable {margin:auto; padding:auto;}
