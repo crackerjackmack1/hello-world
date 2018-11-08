@@ -5,7 +5,7 @@
 
 /* <![CDATA[ */
 html {width:auto; height:auto; font-family:Arial, sans-serif; box-sizing:border-box;}
-body{margin:10px; padding:10px;}
+body {margin:10px; padding:10px;}
 
 h2,h3 {text-align:center;}
 
@@ -50,7 +50,7 @@ div#VERSION{font-size: 7pt;}
 
 @media all and (orientation:landscape)
 {
-  body{margin:10px; padding:10px;}
+  body {margin:50px; padding:50px;}
 
   /* Selectors here implimented when width is greater than height. */
   #maintable {margin:auto; padding:auto;}
