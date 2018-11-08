@@ -258,7 +258,7 @@
       return rval
     }
     
-    function refreshPage() {location.reload(true)}
+    function refreshPage() {location.reload()}
     
     function setupHelpBtn()
     {
