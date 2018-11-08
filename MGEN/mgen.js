@@ -12,7 +12,7 @@
     ["Women","August 1, 2019","EN"],
     ["Men","April 25, 2019","EN"],
     ["Women","February 21, 2019","SP"],
-    ["Men","December 6, 2018","SP"],
+    ["Men","December 6, 2018","EN"],
     ["Women","August 9, 2018","EN"],
     ["Men","April 26, 2018","EN"]
     ];
