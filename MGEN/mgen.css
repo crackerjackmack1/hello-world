@@ -47,13 +47,4 @@ div#VERSION{font-size: 7pt;}
   -ms-user-select: all;       /* Internet Explorer */
   user-select: all;           /* Chrome and Opera */
 }
-/*
-@media all and (orientation:landscape)
-{
-  body {margin:50px; padding:50px;}
-  #maintable {width:100%;}
-  input[type="text"] {width:100%;}
-  h2 {font-size:4vw;}
-  h3 {font-size:3vw;}
-} */
 /* ]]> */
