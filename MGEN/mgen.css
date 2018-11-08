@@ -50,10 +50,10 @@ div#VERSION{font-size: 7pt;}
 
 @media all and (orientation:landscape)
 {
-  body {margin:50px; padding:50px;}
+  body {width:auto; margin:50px; padding:50px;}
 
   /* Selectors here implimented when width is greater than height. */
-  #maintable {margin:auto; padding:auto;}
+  #maintable {width:auto; margin:auto; padding:auto;}
   h2 {font-size:4vw;}
   h3 {font-size:3vw;}
 }
