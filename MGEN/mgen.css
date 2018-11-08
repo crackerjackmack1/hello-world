@@ -48,7 +48,7 @@ div#VERSION{font-size: 7pt;}
   user-select: all;           /* Chrome and Opera */
 }
 
-@media all and (orientation:landscape)
+@media screen and (min-width: 800px)
 {
   body {width:auto; margin:50px; padding:50px;}
 
