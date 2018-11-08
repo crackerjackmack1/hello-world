@@ -48,12 +48,13 @@ div#VERSION{font-size: 7pt;}
   user-select: all;           /* Chrome and Opera */
 }
 
-@media screen and (min-width: 1000px) and (orientation:landscape)
+@media all and (min-width: 800px) and (orientation:landscape)
 {
-  body {width:auto; margin:50px; padding:50px;}
+  body {margin:50px; padding:50px;}
 
   /* Selectors here implimented when width is greater than height. */
-  #maintable {width:100%; margin:auto; padding:auto;}
+  #maintable {width:100%;}
+  input[type="text"] {width:100%;}
   h2 {font-size:4vw;}
   h3 {font-size:3vw;}
 }
