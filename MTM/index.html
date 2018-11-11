@@ -23,7 +23,7 @@ input {font-size:12pt;}
 input[type="button"] {width:100px;}
 table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray; border-collapse:collapse;}
-.tablename {background-color: navy; color:white; font-weight:bold;}
+.tablenamecolor {background-color: navy; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
 
@@ -54,7 +54,7 @@ td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray
 	table, tr, td {border: 1px solid black;}
 	tr {page-break-inside:avoid;}
 	#VERSION {display:none;}
-	.tablename {background-color: white; color:black;}
+	.tablenamecolor {background-color: white; color:black;}
 	.description {width:400px;}
 	.grid-container, div.foot {display:none;}
 }
@@ -176,11 +176,12 @@ function addTimeTable()
 	/* Table name header */ 
 	var row=table.insertRow(0); 
 	var th=row.insertCell(0); 
+	th.className="tablenamecolor";
 	th.style.width="0.5cm"; 
 	th.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />'; 
 	
 	th=row.insertCell(1);
-	th.className="tablename point"; 
+	th.className="tablenamecolor point"; 
 	th.setAttribute("colspan","4"); 
 	th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";} 
 	th.innerHTML=tablename;
