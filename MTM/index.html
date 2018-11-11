@@ -156,6 +156,7 @@ function addTimeTable()
 { 
     /* Column header variables */ 
     var s0="Description",s1="Start",s2="Stop",s3="Hrs"; 
+	
 	/* Prompt for Table name */ 
 	var tablename=prompt("Enter a name for the new list","My Time Machine"); 
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;} 
@@ -175,10 +176,14 @@ function addTimeTable()
 	/* Table name header */ 
 	var row=table.insertRow(0); 
 	var th=row.insertCell(0); 
+	th.style.width="0.5cm"; 
+	th.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />'; 
+	
+	th=row.insertCell(1);
 	th.className="tablename point"; 
-	th.setAttribute("colspan","5"); 
+	th.setAttribute("colspan","4"); 
 	th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";} 
-	th.innerHTML=tablename; 
+	th.innerHTML=tablename;
 	
 	/* Column headers */ 
 	row=table.insertRow(1); 
@@ -186,7 +191,8 @@ function addTimeTable()
 	/* Checkbox */ 
 	var td0=row.insertCell(0);  
 	td0.style.width="0.5cm"; 
-	td0.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />'; 
+	//td0.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />';
+	td0.innerHTML='✔'; 
 	
 	/* Description */ 
 	var td1=row.insertCell(1); 
