@@ -159,6 +159,7 @@ function addTimeTable()
 	/* Prompt for Table name */ 
 	var tablename=prompt("Enter a name for the new list","My Time Machine"); 
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;} 
+	
 	/* Create Table */ 
 	var table=document.createElement("TABLE"); 
 	table.setAttribute("cellspacing","0"); 
@@ -169,7 +170,8 @@ function addTimeTable()
 	table.style.marginTop="1.5em"; 
 	table.style.marginBottom="1.5em";
 	table.onclick=function(){curTable=this.id;} 
-	stable.appendChild(table); 
+	stable.appendChild(table);
+	
 	/* Table name header */ 
 	var row=table.insertRow(0); 
 	var th=row.insertCell(0); 
@@ -177,39 +179,47 @@ function addTimeTable()
 	th.setAttribute("colspan","5"); 
 	th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";} 
 	th.innerHTML=tablename; 
+	
 	/* Column headers */ 
 	row=table.insertRow(1); 
+	
 	/* Checkbox */ 
 	var td0=row.insertCell(0);  
 	td0.style.width="0.5cm"; 
 	td0.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />'; 
+	
 	/* Description */ 
 	var td1=row.insertCell(1); 
 	td1.className="subhead"; 
 	td1.style.width="auto"; 
 	td1.style.textAlign="left"; 
 	td1.innerHTML="Description"; 
+	
 	/* Start time */ 
 	var td2=row.insertCell(2); 
 	td2.className="subhead"; 
 	td2.style.width="1.5cm"; 
     td2.style.textAlign="center"; 
     td2.innerHTML="Start"; 
+	
 	/* Stop time */ 
 	var td3=row.insertCell(3); 
 	td3.className="subhead";  
 	td3.style.width="1.5cm"; 
     td3.style.textAlign="center"; 
     td3.innerHTML="Stop"; 
+	
 	/* Hrs & 10ths */ 
 	var td4=row.insertCell(4); 
 	td4.className="subhead";  
 	td4.style.width="1.0cm"; 
     td4.style.textAlign="center"; 
     td4.innerHTML="Hrs."; 
+
 	/* Footer row */ 
 	var footer=table.createTFoot(); 
     row=footer.insertRow(0); 
+
     /* Cell for "Total:" */ 
     var cell0=row.insertCell(0); 
 	cell0.className="footer"; 
@@ -217,6 +227,7 @@ function addTimeTable()
     cell0.style.textAlign="right"; 
 	cell0.style.borderRight="none"; 
     cell0.innerHTML="<b>Total: </b>"; 
+	
     /* Cell for sum total hours */ 
     var cell1=row.insertCell(1); 
 	cell0.className="footer"; 
