@@ -19,11 +19,10 @@
 <style>
 /*<![CDATA[*/
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; padding:auto; box-sizing:border-box; text-align:center;}
-input {font-size:12pt;}
 input[type="button"] {width:100px;}
 table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray; border-collapse:collapse;}
-label {font-size:12px;}
+label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
 .tablenamecolor {background-color: navy; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
@@ -66,8 +65,11 @@ label {font-size:12px;}
 
 <body onload="getTotalTime();">
 
+<!-- TODO code for fixed menu bar here -->
+
 <div id="mtm" class="grid-container">
 	<div class="item1"><b>My Time Machine<sup>&copy;</sup></b></div>
+	
 	<div class="item2">
 		<b>Start Time</b><sup><small>&#64;</small></sup><br />
 		<input id="startTime" type="time" value="08:00" onchange="getTotalTime();" />
@@ -172,6 +174,7 @@ function addTimeTable()
 	table.style.marginTop="1.5em"; 
 	table.style.marginBottom="1.5em";
 	table.onclick=function(){curTable=this.id;} 
+	table.ontouchstart=function(){curTable=this.id;} 
 	stable.appendChild(table);
 	
 	/* Table name header */ 
@@ -179,7 +182,7 @@ function addTimeTable()
 	var th=row.insertCell(0); 
 	th.className="tablenamecolor";
 	th.style.width="0.5cm"; 
-	th.innerHTML='<input type="checkbox" checked onchange="deleteMyTable(curTable)" />'; 
+	th.innerHTML='<input type="checkbox" title="Delete table" checked onchange="deleteMyTable(curTable)" />'; 
 	
 	th=row.insertCell(1);
 	th.className="tablenamecolor point"; 
@@ -194,7 +197,7 @@ function addTimeTable()
 	var td0=row.insertCell(0);  
 	td0.style.width="0.5cm";
 	td0.style.color="blue";
-	td0.innerHTML='✔'; 
+	td0.innerHTML='&diams;'; 
 	
 	/* Description */ 
 	var td1=row.insertCell(1); 
@@ -262,7 +265,7 @@ function addTimeLine(ndx)
     else {row=table.insertRow(ndx);} 
     /* Checkbox cell */ 
     var td0=row.insertCell(0); 
-    td0.innerHTML='<input type="checkbox" checked onchange="deleteMyRow(this)" />'; 
+    td0.innerHTML='<input type="checkbox" title="Delete row" checked onchange="deleteMyRow(this)" />'; 
     /* Description */ 
     var td1=row.insertCell(1); 
 	td1.className="description point"; 
@@ -286,8 +289,8 @@ function addTimeLine(ndx)
 	td4.className="totalhours point"; 
 	td4.style.textAlign="right"; 
 	td4.style.paddingRight="5px"; 
-    //td4.ontouchstart=function(){hiLightRow(this.parentNode)}
-    //td4.ontouchcancel=function(){unhiLightRow(this.parentNode)} 
+    td4.ontouchstart=function(){hiLightRow(this.parentNode)}
+    td4.ontouchcancel=function(){unhiLightRow(this.parentNode)} 
 	td4.ondblclick=function(){insertRowAt(this.parentNode)}  
     td4.onmouseover=function(){hiLightRow(this.parentNode)}
     td4.onmouseout=function(){unhiLightRow(this.parentNode)} 
@@ -299,7 +302,7 @@ function addTimeLine(ndx)
 /* Insert row below selected row index */ 
 function insertRowAt(e)
 {
-    var table=document.getElementById(curTable);
+    var table=document.getElementById(e.parentNode.parentNode.id);
     var n=e.rowIndex;
 	addTimeLine(n+1);
     unhiLightRow(e);
@@ -308,14 +311,14 @@ function insertRowAt(e)
 /* Remove highlight color at selected row index */ 
 function unhiLightRow(e) 
 {
-    var table=document.getElementById(curTable);
+    var table=document.getElementById(e.parentNode.parentNode.id);
 	table.rows[e.rowIndex].style.backgroundColor=""; 
 } 
 
 /* Set highlight color on selected row */ 
 function hiLightRow(e) 
 {
-    var table=document.getElementById(curTable);
+    var table=document.getElementById(e.parentNode.parentNode.id);
 	table.rows[e.rowIndex].style.backgroundColor="yellow"; 
 }
 
