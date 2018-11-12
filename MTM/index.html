@@ -311,6 +311,7 @@ function insertRowAt(e)
 /* Remove highlight color at selected row index */ 
 function unhiLightRow(e) 
 {
+    curTable=e.parentNode.parentNode.id; 
     var table=document.getElementById(e.parentNode.parentNode.id);
 	table.rows[e.rowIndex].style.backgroundColor=""; 
 } 
@@ -318,6 +319,7 @@ function unhiLightRow(e)
 /* Set highlight color on selected row */ 
 function hiLightRow(e) 
 {
+    curTable=e.parentNode.parentNode.id; 
     var table=document.getElementById(e.parentNode.parentNode.id);
 	table.rows[e.rowIndex].style.backgroundColor="yellow"; 
 }
