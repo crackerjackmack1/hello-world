@@ -182,7 +182,7 @@ function addTimeTable()
 	var th=row.insertCell(0); 
 	th.className="tablenamecolor";
 	th.style.width="0.5cm"; 
-	th.innerHTML='<input type="checkbox" title="Delete table" checked onchange="deleteMyTable(curTable)" />'; 
+	th.innerHTML='<input type="checkbox" title="Delete this table." checked onchange="deleteMyTable(curTable)" />'; 
 	
 	th=row.insertCell(1);
 	th.className="tablenamecolor point"; 
@@ -265,7 +265,7 @@ function addTimeLine(ndx)
     else {row=table.insertRow(ndx);} 
     /* Checkbox cell */ 
     var td0=row.insertCell(0); 
-    td0.innerHTML='<input type="checkbox" title="Delete row" checked onchange="deleteMyRow(this)" />'; 
+    td0.innerHTML='<input type="checkbox" title="Delete this row." checked onchange="deleteMyRow(this)" />'; 
     /* Description */ 
     var td1=row.insertCell(1); 
 	td1.className="description point"; 
