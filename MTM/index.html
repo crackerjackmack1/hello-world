@@ -21,11 +21,11 @@
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; padding:auto; box-sizing:border-box; text-align:center;}
 input[type="button"] {width:100px;}
 table {border:1px solid black; width:95%;}
-table:hover {border:2px solid navy;}
+table:hover {border:2px solid #000080;}
 td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
 label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
-.tablenamecolor {background-color: navy; color:white; font-weight:bold;}
+.tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
 
@@ -44,7 +44,7 @@ label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
     margin: 15px;
 }
 .grid-container > div {text-align: center; padding: 5px; font-size: 16px; border:0px solid gray;}
-.foot {position:fixed; left:0; bottom:0; width:100%; background-color:navy; color:white; text-align:center;}
+.foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:16pt; font-weight:bold;}
 #stable {width:auto; margin:auto; padding:auto;}
 #VERSION {text-align:center; font-size:12px; font-weight:bold; padding:10px;}
@@ -382,7 +382,7 @@ function setVersion()
     var ver=document.querySelector('meta[name="version"]').content; 
     var author=document.querySelector('meta[name="author"]').content;
     document.getElementById("MYTITLE").innerHTML=ver; 
-    document.getElementById("VERSION").innerHTML="&copy;2018, "+author; 
+    document.getElementById("VERSION").innerHTML="&copy;2010, 2018, "+author; 
 } 
 setVersion(); 
 </script>
