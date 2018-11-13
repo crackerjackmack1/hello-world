@@ -21,7 +21,9 @@
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; padding:auto; box-sizing:border-box; text-align:center;}
 input[type="button"] {width:100px;}
 table {border:1px solid black; width:95%;}
+table:hover {border:2px solid navy;}
 td {font-size:12pt; vertical-align:top; text-align:center; border:1px solid gray; border-collapse:collapse;}
+td.totalhours:hover{background-color:yellow;}
 label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
 .tablenamecolor {background-color: navy; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
@@ -71,26 +73,27 @@ label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
 	<div class="item1"><b>My Time Machine</b></div>
 	
 	<div class="item2">
-		<b>Start Time</b><sup><small>&#64;</small></sup><br />
+		<b>Start Time</b><br />
 		<input id="startTime" type="time" value="08:00" onchange="getTotalTime();" />
 	</div>
 	<div class="item3">
-		<b>Stop Time</b><sup><small>&#64;</small></sup><br />
+		<b>Stop Time</b><br />
 		<input id="stopTime" type="time" value="17:00" onchange="getTotalTime();" />
 	</div>
 	<div class="item4">
 		<p id="total"></p>
 		<b>Hours</b>
 	</div>
-	<div class="item5" style="padding-bottom:50px;">
+	<!--div class="item5" style="padding-bottom:50px;"-->
+	<div class="item5">
 		<input type="button" value="Add Table" onclick="addTimeTable(); this.blur();" />
 	</div>
 	<div class="item6" style="vertical-align:top;">
 		<input type="button" value="Add Line" onclick="addTimeLine(); this.blur();" /><br />
-		<div style="text-align:left; margin-top:5px">
-		<label for="btn-0"><input type="radio" id="btn-0" name="add-a-row" checked /> To top</label><br />
-		<label for="btn-1"><input type="radio" id="btn-1" name="add-a-row" /> To bottom</label>
-		</div>
+		<!--div style="text-align:left; margin-top:5px">
+		<input type="radio" id="btn-0" name="add-a-row" checked /><label for="btn-0"> Top</label><br />
+		<input type="radio" id="btn-1" name="add-a-row" /><label for="btn-1"> Bottom</label>
+		</div-->
 	</div>
 </div>
 
@@ -178,10 +181,13 @@ function addTimeTable()
 	stable.appendChild(table);
 	
 	/* Table name header */ 
-	var row=table.insertRow(0); 
+	var row=table.insertRow(0);
+    
 	var th=row.insertCell(0); 
 	th.className="tablenamecolor";
 	th.style.width="0.5cm"; 
+	
+	/* Add Checkbox */ 
 	th.innerHTML='<input type="checkbox" title="Delete this table." checked onchange="deleteMyTable(curTable)" />'; 
 	
 	th=row.insertCell(1);
@@ -193,7 +199,7 @@ function addTimeTable()
 	/* Column headers */ 
 	row=table.insertRow(1); 
 	
-	/* Checkbox */ 
+	/* Cell 0 Diamond */ 
 	var td0=row.insertCell(0);  
 	td0.style.width="0.5cm";
 	td0.style.color="blue";
@@ -259,10 +265,11 @@ function addTimeLine(ndx)
     /* Create new data row */ 
     var row="";
     /* Insert new data row at top */
-    if(arguments.length==0 && addRowToTop[0].checked) {row=table.insertRow(2);}
-    else if(arguments.length==0 && addRowToTop[1].checked) {row=table.insertRow(getRowCount()-1);}
+    /* if(arguments.length==0 && addRowToTop[0].checked) {row=table.insertRow(2);} */
+    if(arguments.length==0) {row=table.insertRow(2);}
+    /* else if(arguments.length==0 && addRowToTop[1].checked) {row=table.insertRow(getRowCount()-1);} */
     /* Insert new data row below hilighted row */
-    else {row=table.insertRow(ndx);} 
+    else {row=table.insertRow(ndx);}
     /* Checkbox cell */ 
     var td0=row.insertCell(0); 
     td0.innerHTML='<input type="checkbox" title="Delete this row." checked onchange="deleteMyRow(this)" />'; 
@@ -288,12 +295,8 @@ function addTimeLine(ndx)
     var td4=row.insertCell(4); 
 	td4.className="totalhours point"; 
 	td4.style.textAlign="right"; 
-	td4.style.paddingRight="5px"; 
-    td4.ontouchstart=function(){hiLightRow(this.parentNode)}
-    td4.ontouchcancel=function(){unhiLightRow(this.parentNode)} 
-	td4.ondblclick=function(){insertRowAt(this.parentNode)}  
-    td4.onmouseover=function(){hiLightRow(this.parentNode)}
-    td4.onmouseout=function(){unhiLightRow(this.parentNode)} 
+	td4.style.paddingRight="5px";  
+	td4.ondblclick=function(){insertRowAt(this.parentNode)}
     td4.innerHTML=decimaltime.innerHTML;
     /* Update Totals */ 
     sumTableHoursCol(); 
@@ -302,27 +305,11 @@ function addTimeLine(ndx)
 /* Insert row below selected row index */ 
 function insertRowAt(e)
 {
+    curTable=e.parentNode.parentNode.id; 
     var table=document.getElementById(e.parentNode.parentNode.id);
     var n=e.rowIndex;
 	addTimeLine(n+1);
-    unhiLightRow(e);
 } 
-
-/* Remove highlight color at selected row index */ 
-function unhiLightRow(e) 
-{
-    curTable=e.parentNode.parentNode.id; 
-    var table=document.getElementById(e.parentNode.parentNode.id);
-	table.rows[e.rowIndex].style.backgroundColor=""; 
-} 
-
-/* Set highlight color on selected row */ 
-function hiLightRow(e) 
-{
-    curTable=e.parentNode.parentNode.id; 
-    var table=document.getElementById(e.parentNode.parentNode.id);
-	table.rows[e.rowIndex].style.backgroundColor="yellow"; 
-}
 
 /*
  * Calculate total time spent in hours & tenths of 
