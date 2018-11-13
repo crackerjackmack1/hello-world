@@ -5,7 +5,7 @@
 <meta name="generator" content="Bluefish 2.2.10" >
 <meta name="author" content="J.G. McCracken">
 <meta name="date" content="2018-11-06T01:00:07-0600">
-<meta name="copyright" content="©2010, My Time Machine (MTM) is the physical and intellectual property of Johnny G. McCracken, All rights reserved.">
+<meta name="copyright" content="©2010-2018 My Time Machine (MTM), Johnny G. McCracken, All rights reserved.">
 <meta name="keywords" content="">
 <meta name="description" content="A web-based personal project/job time tracking utility">
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
@@ -102,15 +102,16 @@ label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
 <!--  ***END VERSIONING  -->
 
 <script type="text/javascript" charset="UTF-8"> 
-/* Position of row to be added */
-var addRowToTop=document.getElementsByName("add-a-row") 
 /* Name of currrent table having focus */
 var curTable=""; 
+
 /* References to "time" <input> controls */
 var time1=document.getElementById("startTime"); 
 var time2=document.getElementById("stopTime"); 
+
 /* Reference to cell where total hours are displayed */
 var decimaltime=document.getElementById("total"); 
+
 /* Div where tables are created */
 var stable=document.getElementById("stable"); 
 
@@ -143,16 +144,7 @@ function sumTableHoursCol()
     f.innerHTML="<b>"+total.toFixed(1)+"</b>"; 
 }
 
-/* 
- * ADD NEW TIME TABLE
- * Data cells: |✔| Desc | Start Time | Stop Time | Hrs.|
- * Definitions:
- * ✔: When unchecked deletes the table or row
- * Desc: Briefly describes the job or task
- * Start: Time the job or task began
- * Stop: Time the job or task ended
- * Hrs: Hours spent on job/task (tenths of an hour)
- */ 
+/* ADD NEW TIME TABLE */ 
 function addTimeTable() 
 { 
     /* Column header variables */ 
@@ -305,7 +297,7 @@ function addTimeLine(ndx)
     td4.className="totalhours point"; 
     td4.style.textAlign="right"; 
     td4.style.paddingRight="5px";  
-    td4.ondblclick=function(){insertRowAt(this.parentNode)}
+    td4.ondblclick=function(){insertRowAt(this.parentNode); this.blur();}
     td4.innerHTML=decimaltime.innerHTML;
     
     /* Calculate & update "Total" */ 
@@ -323,7 +315,7 @@ function insertRowAt(e)
 
 /*
  * Calculate total time spent in hours & tenths of 
- * an hour & report result in <p id="total"> tag
+ * an hour & report result.
  */ 
 function getTotalTime() 
 { 
