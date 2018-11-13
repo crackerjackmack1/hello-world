@@ -232,13 +232,15 @@ function addTimeTable()
     cell0.style.borderRight="none"; 
     cell0.innerHTML="<b>Total: </b>"; 
     
-    /* Cell for sum total hours */ 
+    /* Cell for calculated "Total" hours */ 
     var cell1=row.insertCell(1); 
     cell0.className="footer"; 
     cell1.style.textAlign="right"; 
     cell1.style.paddingRight="5px"; 
     cell1.style.borderLeft="none"; 
     cell1.setAttribute("id", curTable+"_footer"); 
+    
+    /*  */
     addTimeLine(); 
 }
 
