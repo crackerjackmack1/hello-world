@@ -104,7 +104,7 @@ label {font-size:12px; padding-bottom:5px; vertical-align:middle;}
 </body>
 
 <script type="text/javascript" charset="UTF-8">
-//"use strict";
+"use strict";
 
 /* Name of currrent table having focus */
 var curTable="";
@@ -167,6 +167,8 @@ function addTimeTable()
     table.style.margin="auto";
     table.style.marginTop="1.5em";
     table.style.marginBottom="1.5em";
+    table.onclick=function(){curTable=this.id;}
+    table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
 
     /* Table name header */
@@ -182,8 +184,6 @@ function addTimeTable()
     th=row.insertCell(1);
     th.className="tablenamecolor point";
     th.setAttribute("colspan","4");
-    th.ontouchcancel=function(){curTable=this.id;}
-    th.onclick=function(){curTable=this.id;}
     th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";}
     th.innerHTML=tablename;
 
