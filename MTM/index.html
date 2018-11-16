@@ -151,9 +151,6 @@ function sumTableHoursCol()
 /* ADD NEW TIME TABLE */
 function addTimeTable()
 {
-    /* Column header variables */
-    var s0="Description",s1="Start",s2="Stop",s3="Hrs";
-
     /* Prompt for Table name */
     var tablename=prompt("Enter a name for the new table.","My Time Machine");
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
@@ -177,17 +174,17 @@ function addTimeTable()
     /* Add 1st cell to the row, and checkbox to it's innerHTML */
     var th=row.insertCell(0);
     th.className="tablenamecolor point";
-    th.style.fontSize="16pt"
+    th.style.fontSize="14pt"
     th.style.width="0.5cm";
     th.style.color="white";
-    th.onclick=function(){deleteMyTable(this.id)}
-    th.innerHTML="&times;";
+    th.onclick=function(){deleteMyTable(this.id);}
+    th.innerHTML="&#10004;";
 
     /* Table name header cell */
     th=row.insertCell(1);
     th.className="tablenamecolor point";
     th.setAttribute("colspan","4");
-    th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";}
+    th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML);}
     th.innerHTML=tablename;
 
     /* Column headers row */
@@ -278,7 +275,11 @@ function addTimeLine(ndx)
 
     /* Insert a cell & add a checkbox to it */
     var td0=row.insertCell(0);
-    td0.innerHTML='<input type="checkbox" title="Delete this row." checked onchange="deleteMyRow(this)" />';
+    td0.className="point";
+    td0.style.fontSize="14pt";
+    td0.style.color="black";
+    td0.onclick=function(){deleteMyRow(this);}
+    td0.innerHTML="&#10004;";
 
     /* Description cell */
     var td1=row.insertCell(1);
@@ -377,7 +378,7 @@ function getTenths(m)
 function deleteMyTable() { var child=document.getElementById(curTable); stable.removeChild(child); }
 
 /* DELETE ROW */
-function deleteMyRow(e) { document.getElementById(curTable).deleteRow(e.parentNode.parentNode.rowIndex); sumTableHoursCol(); }
+function deleteMyRow(e) { document.getElementById(curTable).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(); }
 
 /* RETURN VISIBLE TABLES COUNT */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
