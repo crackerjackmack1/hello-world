@@ -2,6 +2,7 @@
  * Author: J.G. McCracken
  */
 
+ "use strict";
 /*
  * IMPORTANT!
  * Add new retreat dates to the top of the stack!
