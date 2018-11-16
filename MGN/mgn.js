@@ -36,7 +36,7 @@ function postNextRetreatDate()
 
     /*
      * To minimize access time, and make it easier to add new retreat dates
-     * we add them to the top of the array. Likewise, the 'retreats[]' array 
+     * we add them to the top of the array. Likewise, the 'retreats[]' array
      * is parsed from the top down.
      */
     for (i=retreats.length-1; i > 0; i--){if (curDate > Date.parse(retreats[i][1])){continue} else {break}}
@@ -62,7 +62,7 @@ function postNextRetreatDate()
     rpartnerphone.placeholder=(!rLang?"Phone":"Teléfono")
     rpartneremail.placeholder=(!rLang?"Email":"Correo electrónico")
     rcandlelightlabel.innerHTML=(!rLang?"Candlelight Ceremony":"Ceremonia de las Noche de Vela")+"&#58;"
-    rdestemaillabel.innerHTML=(!rLang?"Retreat Email":"Retiro de correo electrónico")+"&#58;"
+    rdestemaillabel.innerHTML=(!rLang?"Retreat Email":"Correo electrónico del Retiro")+"&#58;"
     createbtn.innerHTML="&emsp;"+(!rLang?"Create Message":"Crear un Mensaje")+"&emsp;"
     MSGS_btn.innerHTML="&emsp;"+(!rLang?"CLOSE":"CERRAR")+"&emsp;"
 }
@@ -110,7 +110,7 @@ function outPutMsg()
         + (rfirstname=="su peregrino" || rfirstname=="su peregrina"?" y séllela.":" y ciérrelo.")
     }
     msg+="</li><li>"
-    + (!rLang?"Mail it in a second envelope to&#58;":"Envíelo por correo en un segundo sobre a:") 
+    + (!rLang?"Mail it in a second envelope to&#58;":"Envíelo por correo en un segundo sobre a:")
     + '<blockquote style="margin-left:1em">'
     + "St. Elizabeth Ann Seton Catholic Church<br />"
     + "Attn: "+(rgender?"Men":"Women")+"&apos;s ACTS Retreat<br />"
@@ -169,12 +169,12 @@ function outPutMsg()
     + (!rLang?"After preparing in song and prayer, we will greet the retreatants as they process through the room. ":"Después de prepararnos para cantar y orar, saludaremos a los participantes mientras procesan a través de la sala. ")
     + (!rLang?"Please make every effort to be there for ":"Por favor, haga todo lo posible para estar allí con ")
     + rfirstname+".<br /><br />"
-    + (!rLang?"Again, please help keep this surprise a secret... ":"Nuevamente, por favor, ayuda a mantener esta sorpresa en secreto ... ")
+    + (!rLang?"Again, please help keep this surprise a secret... ":"Nuevamente, por favor, ayude a mantener esta sorpresa en secreto ... ")
     + "<br /><br />";
     if (rpartner)
     {
         msg+=(!rLang?"If you have any questions please contact me, ":"Si tiene alguna pregunta, por favor póngase en contacto conmigo. ")
-        + (!rLang?"I&apos;m happy to help any way I can. ":"Estoy feliz de ayudar de cualquier manera que pueda. ")
+        + (!rLang?"I&apos;m happy to help any way I can. ":"Estoy feliz de ayuder de cualquier manera que pueda. ")
         + "<br /><br />"
     }
 
@@ -284,4 +284,3 @@ function setVersion()
 setupHelpBtn();
 
 setVersion();
-
