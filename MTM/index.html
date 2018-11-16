@@ -158,7 +158,7 @@ function addTimeTable()
     var tablename=prompt("Enter a name for the new table.","My Time Machine");
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
 
-    /* Create Table */
+    /* Create a Table */
     var table=document.createElement("TABLE");
     table.setAttribute("cellspacing","0");
     table.setAttribute("cellpadding","5");
@@ -171,26 +171,26 @@ function addTimeTable()
     table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
 
-    /* Table name header */
+    /* Table name header row */
     var row=table.insertRow(0);
 
+    /* Add 1st cell to the row, and checkbox to it's innerHTML */
     var th=row.insertCell(0);
     th.className="tablenamecolor";
     th.style.width="0.5cm";
-
-    /* Add Checkbox */
     th.innerHTML='<input type="checkbox" title="Delete this table." checked onchange="deleteMyTable(curTable)" />';
 
+    /* Table name headser cell */
     th=row.insertCell(1);
     th.className="tablenamecolor point";
     th.setAttribute("colspan","4");
     th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";}
     th.innerHTML=tablename;
 
-    /* Column headers */
+    /* Column headers row */
     row=table.insertRow(1);
 
-    /* Cell 0 Diamond */
+    /* Cell 0 gets Happy Face */
     var td0=row.insertCell(0);
     td0.style.width="0.5cm";
     td0.style.color="blue";
