@@ -183,7 +183,7 @@ function addTimeTable()
     th.className="tablenamecolor point";
     th.setAttribute("colspan","4");
     th.ontouchstart=function(){curTable=this.id;}
-    th.ontouchcancel=function(){return;}
+    //th.ontouchcancel=function(){return;}
     th.onclick=function(){curTable=this.id;}
     th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML)+"&nbsp;";}
     th.innerHTML=tablename;
