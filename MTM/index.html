@@ -178,7 +178,9 @@ function addTimeTable()
     var th=row.insertCell(0);
     th.className="tablenamecolor";
     th.style.width="0.5cm";
-    th.innerHTML='<input type="checkbox" title="Delete this table." checked onchange="deleteMyTable(curTable)" />';
+    th.style.color="white";
+    th.onclick=function(){deleteMyTable(this.id)}
+    th.innerHTML="✔";
 
     /* Table name headser cell */
     th=row.insertCell(1);
