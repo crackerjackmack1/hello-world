@@ -52,7 +52,7 @@ function postNextRetreatDate()
     + (rdate.getDate()+3)+", "
     + rdate.getFullYear();
 
-    rfirstnamelabel.innerHTML=(!rLang?"Retreatant":(rgender?"Peregrino":"Peregrina"))+"&#58;"
+    rfirstnamelabel.innerHTML=(!rLang?"Retreatant":"Participante")+"&#58;"
     rfirstname.placeholder=(!rLang?"First name":"Nombre")
     rlastname.placeholder=(!rLang?"Last name":"Apellido")
     rcontactlabel.innerHTML=(!rLang?"Contact":"Contacto")+"&#58;"
