@@ -111,7 +111,7 @@ function outPutMsg()
     }
     msg+="</li><li>"
     + (!rLang?"Mail it in a second envelope to&#58;":"Envíelo por correo en un segundo sobre a:")
-    + '<blockquote style="margin-left:1em">'
+    + "<blockquote>"
     + "St. Elizabeth Ann Seton Catholic Church<br />"
     + "Attn: "+(rgender?"Men":"Women")+"&apos;s ACTS Retreat<br />"
     + "6646 Addicks Satsuma Road <br />"
