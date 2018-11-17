@@ -25,7 +25,7 @@ div#HELP_0 div p, div#HELP_1 div p, ol, blockquote {font-size:small; line-height
 div#HELP_0 div h3, div#HELP_1 div h3 {text-align:center;}
 #header, #nextdate, #createbtn {font-variant: small-caps}
 div#VERSION {font-size: 7pt;}
-blockquote {font-weight:normal; width:auto; font-style:oblique; line-height:1.15; margin-left:1em;}
+blockquote {font-weight:bold; width:100%; font-style:oblique; line-height:1.15; margin-left:0em;}
 
 .grid-container {display: grid; grid-gap: 15px; background-color: rgb(255, 255, 255);}
 .grid-item {background-color: rgba(255, 255, 255, 0.8); text-align: left; padding: 3px;}
