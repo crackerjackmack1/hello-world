@@ -170,7 +170,7 @@ function addTimeTable()
     /* Table name header row */
     var row=table.insertRow(0);
 
-    /* Add 1st cell to the row, and checkbox to it's innerHTML */
+    /* Add 1st cell to the row, and checkmark (✔) to it's innerHTML */
     var th=row.insertCell(0);
     th.className="tablenamecolor point";
     th.style.fontSize="14pt"
@@ -189,8 +189,9 @@ function addTimeTable()
     /* Column headers row */
     row=table.insertRow(1);
 
-    /* Cell 0 gets Happy Face */
+    /* Cell 0 gets a Happy Face (☺ &#9786; / &#128522;) */
     var td0=row.insertCell(0);
+    td0.style.fontSize="14pt";
     td0.style.width="0.5cm";
     td0.style.color="blue";
     td0.innerHTML='&#9786;';
@@ -223,11 +224,11 @@ function addTimeTable()
     td4.style.textAlign="center";
     td4.innerHTML="Hrs.";
 
-    /* Footer row */
+    /* Footer "Total: Hours" row */
     var footer=table.createTFoot();
     row=footer.insertRow(0);
 
-    /* Cell for "Total:" */
+    /* Cell0 for "Total:" label */
     var cell0=row.insertCell(0);
     cell0.className="footer";
     cell0.setAttribute("colspan","4");
@@ -235,7 +236,7 @@ function addTimeTable()
     cell0.style.borderRight="none";
     cell0.innerHTML="<b>Total: </b>";
 
-    /* Cell for calculated "Total" hours */
+    /* Cell1 for calculated "Total" hours */
     var cell1=row.insertCell(1);
     cell0.className="footer";
     cell1.style.textAlign="right";
@@ -243,7 +244,7 @@ function addTimeTable()
     cell1.style.borderLeft="none";
     cell1.setAttribute("id", curTable+"_footer");
 
-    /*  */
+    /* Add 1st record/line to the table */
     addTimeLine();
 }
 
