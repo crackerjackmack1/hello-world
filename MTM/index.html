@@ -105,9 +105,8 @@ td.totalhours:hover{background-color:yellow;}
 <script type="text/javascript" charset="UTF-8">
 "use strict";
 
-var d=new Date();
-var shortdate=d.toLocaleDateString();
-var longdate=d.toDateString();
+/* DATE FOR TIME TABLE NAMES */
+var today="";
 
 /* Name of currrent table having focus */
 var curTable="";
@@ -125,9 +124,6 @@ var stable=document.getElementById("stable");
 /*
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
-
-/* DATE FORMATS FOR TABLE NAME */
-var dateFormat=0;
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
@@ -163,21 +159,21 @@ function getDateForTableName()
 {
   /*
    * DATE FORMATS FOR TABLE NAME:
-   * 0 = short (mm/dd/YYYY-default) = d.toLocaleDateString()
-   * 1 = full (Weekday Month Day Year) = d.toDateString()
+   * 0 = short (mm/dd/YYYY-default)
+   * 1 = full (Weekday Month Day Year)
    * NOTE: Incorporate with localStorage.methods()
    */
   var d=new Date();
   var shortdate=d.toLocaleDateString();
   var longdate=d.toDateString();
-  return (!dateFormat?shortdate:longdate);
+  today=!dateFormat?shortdate:longdate;
 }
 
 /* ADD NEW TIME TABLE */
 function addTimeTable()
 {
     /* Prompt for Table name */
-    var tablename=prompt("Enter a name for the new table.",(!dateFormat?shortdate:longdate));
+    var tablename=prompt("Enter a name for the new table.",today);
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
 
     /* Create a Table */
@@ -421,6 +417,7 @@ function setVersion()
     document.getElementById("VERSION").innerHTML="&copy;2010, 2018, "+author;
 }
 setVersion();
+getDateForTableName();
 </script>
 
 </html>
