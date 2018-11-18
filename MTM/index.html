@@ -118,6 +118,19 @@ var decimaltime=document.getElementById("total");
 /* Div where tables are created */
 var stable=document.getElementById("stable");
 
+/*
+ * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
+ */
+
+/*
+ * DATE FORMATS FOR TABLE NAME:
+ * 0 = short (mm/dd/YYYY)
+ * 1 = minimum (weekday day, Month Year)
+ * 2 = full
+ * NOTE: Initiate with localStorage.methods()
+ */
+var dateStyle=0;
+
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
 {
@@ -145,6 +158,13 @@ function sumTableHoursCol()
     var tds=table.getElementsByClassName("totalhours");
     for (var i=0; i<tds.length; i++) {total+=Number(tds[i].innerHTML);}
     f.innerHTML="<b>"+total.toFixed(1)+"</b>";
+}
+
+/* GET DATE FOR TIME TABLE */
+function getDateForTableName()
+{
+  var d=new Date();
+
 }
 
 /* ADD NEW TIME TABLE */
