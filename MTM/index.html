@@ -125,11 +125,10 @@ var stable=document.getElementById("stable");
 /*
  * DATE FORMATS FOR TABLE NAME:
  * 0 = short (mm/dd/YYYY)
- * 1 = minimum (weekday day, Month Year)
- * 2 = full
+ * 1 = full (weekday day, Month Year)
  * NOTE: Initiate with localStorage.methods()
  */
-var dateStyle=0;
+var dateFormat=0;
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
