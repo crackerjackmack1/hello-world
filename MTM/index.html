@@ -44,7 +44,7 @@ td.totalhours:hover{background-color:yellow;}
 }
 .grid-container > div {text-align: center; padding: 5px; font-size: 16px; border:0px solid gray;}
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
-#total {font-size:16pt; font-weight:bold;}
+#total {font-size:12pt; font-weight:bold;}
 #stable {width:auto; margin:auto; padding:auto;}
 #VERSION {text-align:center; font-size:12px; font-weight:bold; padding:10px;}
 
@@ -80,8 +80,8 @@ td.totalhours:hover{background-color:yellow;}
         <input id="stopTime" type="time" value="17:00" onchange="getTotalTime();" />
     </div>
     <div class="item4">
-        <p id="total"></p>
         <b>Hours</b>
+        <p id="total"></p>
     </div>
     <div class="item5">
         <input type="button" value="+ Table" onclick="addTimeTable(); this.blur();" />
@@ -122,12 +122,7 @@ var stable=document.getElementById("stable");
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
 
-/*
- * DATE FORMATS FOR TABLE NAME:
- * 0 = short (mm/dd/YYYY)
- * 1 = full (weekday day, Month Year)
- * NOTE: Initiate with localStorage.methods()
- */
+/* DATE FORMATS FOR TABLE NAME */
 var dateFormat=0;
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
@@ -162,15 +157,24 @@ function sumTableHoursCol()
 /* GET DATE FOR TIME TABLE */
 function getDateForTableName()
 {
+  /*
+   * DATE FORMATS FOR TABLE NAME:
+   * 0 = short (mm/dd/YYYY-default) = d.toLocaleDateString()
+   * 1 = full (Weekday Month Day Year) = d.toDateString()
+   * NOTE: Incorporate with localStorage.methods()
+   */
   var d=new Date();
+  //var sdate=d.toLocaleDateString();
+  //var ldate=d.toDateString();
 
+  return (!dateFormat?d.toLocaleDateString():d.toDateString());
 }
 
 /* ADD NEW TIME TABLE */
 function addTimeTable()
 {
     /* Prompt for Table name */
-    var tablename=prompt("Enter a name for the new table.","My Time Machine");
+    var tablename=prompt("Enter a name for the new table.",getDateForTableName());
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
 
     /* Create a Table */
