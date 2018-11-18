@@ -105,6 +105,10 @@ td.totalhours:hover{background-color:yellow;}
 <script type="text/javascript" charset="UTF-8">
 "use strict";
 
+var d=new Date();
+var shortdate=d.toLocaleDateString();
+var longdate=d.toDateString();
+
 /* Name of currrent table having focus */
 var curTable="";
 
@@ -173,7 +177,7 @@ function getDateForTableName()
 function addTimeTable()
 {
     /* Prompt for Table name */
-    var tablename=prompt("Enter a name for the new table.",getDateForTableName());
+    var tablename=prompt("Enter a name for the new table.",(!dateFormat?shortdate:longdate));
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
 
     /* Create a Table */
