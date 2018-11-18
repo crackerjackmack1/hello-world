@@ -164,10 +164,9 @@ function getDateForTableName()
    * NOTE: Incorporate with localStorage.methods()
    */
   var d=new Date();
-  //var sdate=d.toLocaleDateString();
-  //var ldate=d.toDateString();
-
-  return (!dateFormat?d.toLocaleDateString():d.toDateString());
+  var shortdate=d.toLocaleDateString();
+  var longdate=d.toDateString();
+  return (!dateFormat?shortdate:longdate);
 }
 
 /* ADD NEW TIME TABLE */
