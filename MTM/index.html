@@ -108,11 +108,11 @@ td.totalhours:hover{background-color:yellow;}
 /* Name of currrent table having focus */
 var curTable="";
 
-/* References to "time" <input> controls */
+/* References to <input type="time"> controls */
 var time1=document.getElementById("startTime");
 var time2=document.getElementById("stopTime");
 
-/* Reference to cell where total hours are displayed */
+/* Reference to cell displaying "total" hours */
 var decimaltime=document.getElementById("total");
 
 /* Div where tables are created */
@@ -164,10 +164,10 @@ function getDateForTableName()
    * NOTE: Incorporate with localStorage.methods()
    */
   var d=new Date();
-  //var sdate=d.toLocaleDateString();
-  //var ldate=d.toDateString();
+  var shortdate=d.toLocaleDateString();
+  var longdate=d.toDateString();
 
-  return (!dateFormat?d.toLocaleDateString():d.toDateString());
+  return (!dateFormat?shortdate:longdate);
 }
 
 /* ADD NEW TIME TABLE */
