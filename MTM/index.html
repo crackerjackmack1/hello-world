@@ -102,8 +102,8 @@ td.totalhours:hover{background-color:yellow;}
     <div class="grid-item">
         <b>Date</b><br />
         <div style="text-align:left;">
-            <label><input type="radio" name="dateformat" onchange="" />Long</label><br />
-            <label><input type="radio" name="dateformat" onchange="" />Short&ensp;</label>
+            <label><input type="radio" name="datFormat" onclick="dateFormat=0" checked />Long</label><br />
+            <label><input type="radio" name="datFormat" onclick="dateFormat=1" />Short&ensp;</label>
         </div>
     </div>
     <div class="grid-item">
@@ -127,7 +127,7 @@ td.totalhours:hover{background-color:yellow;}
 "use strict";
 
 /* DATE FOR TIME TABLE NAMES */
-//var dateFormat=document.getElementsByName;
+var dateFormat=0;
 var today="";
 
 /* Name of currrent table having focus */
@@ -146,6 +146,11 @@ var stable=document.getElementById("stable");
 /*
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
+
+function adjDateFormat(bool)
+{
+    today=(bool?d.toLocaleDateString():d.toDateString());
+}
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
@@ -186,7 +191,7 @@ function getDateForTableName()
    * NOTE: Incorporate with localStorage.methods()
    */
   var d=new Date();
-  today=!dateFormat?d.toLocaleDateString():d.toDateString();
+  today=dateFormat?d.toLocaleDateString():d.toDateString();
 }
 
 /* ADD NEW TIME TABLE */
