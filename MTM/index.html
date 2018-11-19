@@ -21,7 +21,7 @@
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; box-sizing:border-box; text-align:center;}
 input[type="button"] {width:auto;}
 table {border:1px solid black; width:95%;}
-table:hover {border:2px solid #000080;}
+/* table:hover {border:2px solid #000080;} */
 td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
 .tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
@@ -102,8 +102,8 @@ td.totalhours:hover{background-color:yellow;}
     <div class="grid-item">
         <b>Date</b><br />
         <div style="text-align:left;">
-            <label><input type="radio" name="datFormat" onclick="dateFormat=0" checked />Long</label><br />
-            <label><input type="radio" name="datFormat" onclick="dateFormat=1" />Short&ensp;</label>
+            <label><input type="radio" name="dateformat" id="dateformat" value="true" onclick="today=d.toDateString()" checked />Long</label><br />
+            <label><input type="radio" name="dateformat" value="false" onclick="today=d.toLocaleDateString()" />Short&ensp;</label>
         </div>
     </div>
     <div class="grid-item">
@@ -127,7 +127,8 @@ td.totalhours:hover{background-color:yellow;}
 "use strict";
 
 /* DATE FOR TIME TABLE NAMES */
-var dateFormat=0;
+var d=new Date();
+var dateFormat="";
 var today="";
 
 /* Name of currrent table having focus */
@@ -146,11 +147,6 @@ var stable=document.getElementById("stable");
 /*
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
-
-function adjDateFormat(bool)
-{
-    today=(bool?d.toLocaleDateString():d.toDateString());
-}
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
@@ -190,7 +186,8 @@ function getDateForTableName()
    * 1 = full (Weekday Month Day Year)
    * NOTE: Incorporate with localStorage.methods()
    */
-  var d=new Date();
+  var radio=document.getElementById("dateformat");
+  dateFormat=radio.checked?0:1;
   today=dateFormat?d.toLocaleDateString():d.toDateString();
 }
 
