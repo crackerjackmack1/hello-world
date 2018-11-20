@@ -211,14 +211,14 @@ function addTimeTable()
     /* Table name header row */
     var row=table.insertRow(0);
 
-    /* Add 1st cell to the row, and checkmark (✔) to it's innerHTML */
+    /* Add 1st cell to the row, and heavy white checkmark (✔) to it's innerHTML */
     var th=row.insertCell(0);
     th.className="tablenamecolor point";
     th.style.fontSize="14pt"
     th.style.width="0.5cm";
     th.style.color="white";
     th.onclick=function(){deleteMyTable(this.id);}
-    th.innerHTML="&#10004;";
+    th.innerHTML="&#10003;";
 
     /* Table name header cell */
     th=row.insertCell(1);
@@ -230,12 +230,12 @@ function addTimeTable()
     /* Column headers row */
     row=table.insertRow(1);
 
-    /* Cell 0 gets a Happy Face (☺ &#9786; / &#128522;) */
+    /* Cell 0 gets a CHI RHO (☧ &#9767; | ☺ &#9786; | &#128522;) */
     var td0=row.insertCell(0);
     td0.style.fontSize="14pt";
     td0.style.width="0.5cm";
     td0.style.color="blue";
-    td0.innerHTML='&#9786;';
+    td0.innerHTML='&#9767;';
 
     /* Description */
     var td1=row.insertCell(1);
@@ -320,7 +320,7 @@ function addTimeLine(ndx)
     td0.style.fontSize="14pt";
     td0.style.color="black";
     td0.onclick=function(){deleteMyRow(this);}
-    td0.innerHTML="&#10004;";
+    td0.innerHTML="&#10003;";
 
     /* Description cell */
     var td1=row.insertCell(1);
