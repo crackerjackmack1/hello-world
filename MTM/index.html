@@ -145,6 +145,20 @@ var stable=document.getElementById("stable");
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
 
+function setTimeInputs()
+{
+    var d=new Date();
+    var x1=document.getElementById("startTime");
+    var x2=document.getElementById("stopTime");
+    x2.value=x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
+    x2.stepUp(60);
+    function addZero(i)
+    {
+        if (i<10){i-")"+i;}
+        return i;
+    }
+}
+
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
 {
@@ -230,12 +244,12 @@ function addTimeTable()
     /* Column headers row */
     row=table.insertRow(1);
 
-    /* Cell 0 gets a CHI RHO (☧ &#9767; | ☺ &#9786; | &#128522;) */
+    /* Cell 0 gets a email symbol (☧ &#9767; | ☺ &#9786; | &#9993;) */
     var td0=row.insertCell(0);
     td0.style.fontSize="14pt";
     td0.style.width="0.5cm";
     td0.style.color="blue";
-    td0.innerHTML='&#9767;';
+    td0.innerHTML='<a href="<a href="mailto:j.g.mccracken65%40gmail.com?body=Greetings,%20&subject=MTM%20v1.4">&#9993;</a>"';
 
     /* Description */
     var td1=row.insertCell(1);
