@@ -145,6 +145,20 @@ var stable=document.getElementById("stable");
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
 
+function setTimeInputs()
+{
+    var d=new Date();
+    var x1=document.getElementById("startTime");
+    var x2=document.getElementById("stopTime");
+    x2.value=x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
+    x2.stepUp(60);
+    function addZero(i)
+    {
+        if (i<10){i-")"+i;}
+        return i;
+    }
+}
+
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
 {
