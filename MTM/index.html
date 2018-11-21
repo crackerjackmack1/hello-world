@@ -246,10 +246,11 @@ function addTimeTable()
 
     /* Cell 0 gets a email symbol (☧ &#9767; | ☺ &#9786; | &#9993;) */
     var td0=row.insertCell(0);
-    td0.style.fontSize="14pt";
+    td0.style.fontSize="12pt";
     td0.style.width="0.5cm";
     td0.style.color="blue";
-    td0.innerHTML='<a href="mailto:j.g.mccracken65%40gmail.com?body=Greetings,%20&subject=MTM%20v1.4">&#9993;</a>';
+    th.ondblclick=function(){/* TODO: Link help section to this function. */}
+    td0.innerHTML="?";
 
     /* Description */
     var td1=row.insertCell(1);
@@ -289,7 +290,7 @@ function addTimeTable()
     cell0.setAttribute("colspan","4");
     cell0.style.textAlign="right";
     cell0.style.borderRight="none";
-    cell0.innerHTML="<a style='float:left;' href="mailto:j.g.mccracken65%40gmail.com?body=Greetings,%20&subject=MTM%20v1.4">&#9993;</a><b>Total: </b>";
+    cell0.innerHTML='<a style="float:left; font-size:14pt; font-weight:bold; text-decoration:none;" href="mailto:j.g.mccracken65%40gmail.com?body=Greetings,%20&subject=MTM%20v1.4">&#9993;</a><b>Total: </b>';
 
     /* Cell1 for calculated "Total" hours */
     var cell1=row.insertCell(1);
