@@ -150,12 +150,11 @@ function setTimeInputs()
     var d=new Date();
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
-    x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
-    x2.value=x1.value;
+    x2.value=x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
     x2.stepUp(60);
     function addZero(i)
     {
-        if (i<10){i-")"+i;}
+        if (i<10){i="0"+i;}
         return i;
     }
      getTotalTime();
@@ -164,10 +163,10 @@ function setTimeInputs()
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
 {
-    var table=document.getElementById(curTable);
-    var c2=table.rows[e.rowIndex].cells[2];
-    var c3=table.rows[e.rowIndex].cells[3];
-    var c4=table.rows[e.rowIndex].cells[4];
+    var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
+    var c2=table.rows[e.parentNode.rowIndex].cells[2];
+    var c3=table.rows[e.parentNode.rowIndex].cells[3];
+    var c4=table.rows[e.parentNode.rowIndex].cells[4];
     updateCells();
     var t1=c2.innerHTML.split(":");
     var t2=c3.innerHTML.split(":");
@@ -220,7 +219,7 @@ function addTimeTable()
     table.style.margin="auto";
     table.style.marginTop="1.5em";
     table.style.marginBottom="1.5em";
-    table.onfocus='curTable=this.id';
+    table.onfocus="curTable=this.id";
     table.onclick=function(){curTable=this.id;}
     table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
@@ -234,7 +233,7 @@ function addTimeTable()
     th.style.fontSize="14pt"
     th.style.width="0.5cm";
     th.style.color="white";
-    th.onclick=function(){deleteMyTable(this.id);}
+    th.onclick=function(){deleteMyTable(this);}
     th.innerHTML="&#10003;";
 
     /* Table name header cell */
@@ -300,7 +299,7 @@ function addTimeTable()
     cell1.style.textAlign="right";
     cell1.style.paddingRight="5px";
     cell1.style.borderLeft="none";
-    cell1.setAttribute("id", curTable+"_footer");
+    cell1.setAttribute("id", table.id+"_footer");
 
     /* Add 1st record/line to the table */
     addTimeLine();
@@ -352,14 +351,14 @@ function addTimeLine(ndx)
     var td2=row.insertCell(2);
     td2.className="point";
     td2.style.textAlign="center";
-    td2.ondblclick=function(){adjTimeLine(this.parentNode);}
+    td2.ondblclick=function(){adjTimeLine(this);}
     td2.innerHTML=time1.value;
 
     /* Stop time cell */
     var td3=row.insertCell(3);
     td3.className="point";
     td3.style.textAlign="center";
-    td3.ondblclick=function(){adjTimeLine(this.parentNode);}
+    td3.ondblclick=function(){adjTimeLine(this);}
     td3.innerHTML=time2.value;
 
     /* Hrs & 10ths cell */
@@ -367,7 +366,7 @@ function addTimeLine(ndx)
     td4.className="totalhours point";
     td4.style.textAlign="right";
     td4.style.paddingRight="5px";
-    td4.ondblclick=function(){insertRowAt(this.parentNode);}
+    td4.ondblclick=function(){insertRowBelow(this);}
     td4.innerHTML=decimaltime.innerHTML;
 
     /* Calculate & update "Total" */
@@ -375,11 +374,11 @@ function addTimeLine(ndx)
 }
 
 /* Insert row below the selected row index */
-function insertRowAt(e)
+function insertRowBelow(e)
 {
-    curTable=e.parentNode.parentNode.id;
-    var table=document.getElementById(e.parentNode.parentNode.id);
-    var n=e.rowIndex;
+    curTable=e.parentNode.parentNode.parentNode.id;
+    var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
+    var n=e.parentNode.rowIndex;
     addTimeLine(n+1);
 }
 
@@ -435,10 +434,10 @@ function getTenths(m)
 }
 
 /* DELETE TABLE */
-function deleteMyTable() { var child=document.getElementById(curTable); stable.removeChild(child); }
+function deleteMyTable(e) {var child=document.getElementById(e.parentNode.parentNode.parentNode.id); stable.removeChild(child); }
 
 /* DELETE ROW */
-function deleteMyRow(e) { document.getElementById(curTable).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(); }
+function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(); }
 
 /* RETURN VISIBLE TABLES COUNT */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
