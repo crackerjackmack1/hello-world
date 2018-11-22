@@ -183,7 +183,11 @@ function adjTimeLine(e)
     c4.innerHTML = (parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1);
     sumTableHoursCol();
     return;
-    function updateCells() {c2.innerHTML=time1.value; c3.innerHTML=time2.value;}
+    function updateCells()
+    {
+        if (e.cellIndex==2) {c2.innerHTML=time1.value; c3.innerHTML=time2.value;}
+        else if (e.cellIndex==3) {c3.innerHTML=time2.value;}
+    }
 }
 
 /* SUM TOTAL OF COLUMN "HRS." */
