@@ -151,7 +151,7 @@ function setTimeInputs()
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
     x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
-    x2.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
+    x2.value=x1.value;
     x2.stepUp(60);
     function addZero(i)
     {
