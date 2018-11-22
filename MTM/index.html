@@ -218,6 +218,7 @@ function addTimeTable()
     table.style.margin="auto";
     table.style.marginTop="1.5em";
     table.style.marginBottom="1.5em";
+    table.onfocus='curTable=this.id';
     table.onclick=function(){curTable=this.id;}
     table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
