@@ -258,12 +258,13 @@ function addTimeTable()
     /* Column headers row */
     row=table.insertRow(1);
 
-    /* Cell 0 gets a question mark ? */
+    /* Cell 0 gets one of these: ? | ☧ &#9767; | ☺ &#9786; | &#128522; */
     var td0=row.insertCell(0);
     td0.style.fontSize="12pt";
     td0.style.width="0.5cm";
     td0.style.color="blue";
-    td0.innerHTML='<a style="float:left; font-weight:bold; text-decoration:none;" href="help.html">?</a>';
+    td0.innerHTML='&#9767;';
+    //td0.innerHTML='<a style="float:left; font-weight:bold; text-decoration:none;" href="help.html">&#9767;</a>';
 
     /* Description */
     var td1=row.insertCell(1);
