@@ -150,7 +150,8 @@ function setTimeInputs()
     var d=new Date();
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
-    x2.value=x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
+    x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
+    x2.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
     x2.stepUp(60);
     function addZero(i)
     {
@@ -218,6 +219,7 @@ function addTimeTable()
     table.style.margin="auto";
     table.style.marginTop="1.5em";
     table.style.marginBottom="1.5em";
+    table.onfocus='curTable=this.id';
     table.onclick=function(){curTable=this.id;}
     table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
@@ -289,7 +291,7 @@ function addTimeTable()
     cell0.setAttribute("colspan","4");
     cell0.style.textAlign="right";
     cell0.style.borderRight="none";
-    cell0.innerHTML='<a style="float:left; font-weight:bold; text-decoration:none;" href="mailto:j.g.mccracken65%40gmail.com?body=Greetings:%20&subject=MTM%20v1.4">&#9993;</a><b>Total: </b>';
+    cell0.innerHTML='<a style="float:left; font-weight:bold; text-decoration:none;" href="mailto:j.g.mccracken65%40gmail.com?body=Greetings,%20&subject=MTM%20v1.4">&#9993;</a><b>Total: </b>';
 
     /* Cell1 for calculated "Total" hours */
     var cell1=row.insertCell(1);
@@ -327,6 +329,8 @@ function addTimeLine(ndx)
         /* Insert it below the selected row */
         row=table.insertRow(ndx);
     }
+
+    setTimeInputs();
 
     /* Insert a cell0 & add a checkmark (✔) to it */
     var td0=row.insertCell(0);
