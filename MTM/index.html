@@ -23,8 +23,8 @@ input[type="button"] {width:100%;}
 table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
-input[type="radio"] {margin-top: 5px}
-label {font-weight:bold;}
+input[type="radio"] {margin-top: 1px}
+label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 .tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
@@ -105,18 +105,20 @@ label {font-weight:bold;}
     </div>
 
     <div class="grid-item">
-        <b>Date</b><br />
-        <label><input type="radio" name="dateformat" id="dateformat" value="true" onclick="today=d.toDateString()" checked />Long</label>
+        <b>D<small>ate</small>/N<small>ame</small></b><br />
+        <input type="radio" name="dateformat" id="dateformat" value="true" onclick="today=d.toDateString()" checked /><label>Long&thinsp;</label><br />
+        <input type="radio" name="dateformat" value="false" onclick="today=d.toLocaleDateString()" /><label>Short</label>
     </div>
 
     <div class="grid-item">
-        <b>Add</b><br />
+        <b>A<small>dd</small></b><br />
         <input type="button" value="Table" onclick="addTimeTable(); this.blur();" />
     </div>
 
     <div class="grid-item">
-        <b>Date</b><br />
-        <label><input type="radio" name="dateformat" value="false" onclick="today=d.toLocaleDateString()" />Short</label>
+        <b>I<small>ntervals</small></b><br />
+        <input type="radio" name="incrementes" id="incminutes" onclick="" checked /><label>5 min</label><br />
+        <input type="radio" name="incrementes" value="false" onclick="" /><label>6 min</label>
     </div>
 </div>
 
@@ -183,7 +185,8 @@ function adjTimeLine(e)
     var t2=c3.innerHTML.split(":");
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
-    c4.innerHTML = (parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1);
+    var mIntervals="";
+    c4.innerHTML = (parseInt((m2-m1)/60) + get5MinuteTenths((m2-m1)%60)).toFixed(1);
     sumTableHoursCol();
     return;
     function updateCells()
@@ -419,7 +422,7 @@ function getTotalTime()
     /* Alias' to hold strings converted to Number() for calculations */
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
-    var result=(parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1);
+    var result=(parseInt((m2-m1)/60) + get5MinuteTenths((m2-m1)%60)).toFixed(1);
 
     /* Displays calculated result in the <p> tag */
     p.innerHTML=result;
@@ -433,7 +436,7 @@ function getTotalTime()
  * 9 intervals of 5 minutes each
  * 2 intervals of 2 miutes each
  */
-function getTenths(m)
+function get5MinuteTenths(m)
 {
     var tenths="";
          if (m>=0  && m<=2) {tenths="0.0"}
@@ -447,6 +450,26 @@ function getTenths(m)
     else if (m>=45 && m<=50){tenths="0.8"}
     else if (m>=51 && m<=56){tenths="0.9"}
     else if (m>=57 && m<=59){tenths="1.0"}
+    return Number(tenths);
+}
+
+/*
+ * CONVERT 6 MINUTE INTERVALS TO 10ths OF AN HOUR
+ * Range 0.0 to 1.0
+ */
+function get6MinuteTenths(m)
+{
+    var tenths="";
+         if (m>0  && m<=6) {tenths="0.1"}
+    else if (m>6  && m<=12){tenths="0.2"}
+    else if (m>12 && m<=18){tenths="0.3"}
+    else if (m>18 && m<=24){tenths="0.4"}
+    else if (m>24 && m<=30){tenths="0.5"}
+    else if (m>30 && m<=36){tenths="0.6"}
+    else if (m>36 && m<=42){tenths="0.7"}
+    else if (m>42 && m<=48){tenths="0.8"}
+    else if (m>48 && m<=54){tenths="0.9"}
+    else if (m>54 && m<=60){tenths="1.0"}
     return Number(tenths);
 }
 
