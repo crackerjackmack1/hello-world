@@ -65,7 +65,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:12pt; font-weight:bold;}
-#stable {width:auto; margin:auto;}
+#stable {width:auto; margin:auto; margin-bottom:75px;}
 #VERSION {text-align:center; font-size:12px; font-weight:bold; padding:10px;}
 
 @media print{
@@ -108,7 +108,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
         <!--b>D<small>ate</small>/N<small>ame</small></b><br /-->
         <b>Date/Name</b><br />
         <input type="radio" name="dateformat" id="dateformat1" value="true" onclick="today=d.toDateString()" checked /><label for="dateformat1">Long&thinsp;</label><br />
-        <input type="radio" name="dateformat" id="dateformat2" value="false" onclick="today=d.toLocaleDateString()"  /><label for="dateformat2">Short</label>
+        <input type="radio" name="dateformat" id="dateformat2" value="false" onclick="today=d.toLocaleDateString()" /><label for="dateformat2">Short</label>
     </div>
 
     <div class="grid-item">
@@ -121,7 +121,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
         <!--b>I<small>ntervals</small></b><br /-->
         <b>Intervals</b><br />
         <input type="radio" name="increments" id="increments5" checked /><label for="increments5">5 min</label><br />
-        <input type="radio" name="increments" id="increments6"         /><label for="increments6">6 min</label>
+        <input type="radio" name="increments" id="increments6" /><label for="increments6">6 min</label>
     </div>
 </div>
 
@@ -174,13 +174,11 @@ function setTimeInputs()
 function adjTimeLine(e)
 {
     var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    //var footer=document.getElementById(table.id+"_footer").cells[0]
-    var info=document.getElementById(table.id +"_mincrements")//.rows[0].cells[0].innerHTML;
-    alert(info.innerHTML);
+    var info=document.getElementById(table.id +"_info");
+    //alert(info.innerHTML);
     var c2=table.rows[e.parentNode.rowIndex].cells[2];
     var c3=table.rows[e.parentNode.rowIndex].cells[3];
     var c4=table.rows[e.parentNode.rowIndex].cells[4];
-    //var mIncrements=
 
     updateCells();
     var t1=c2.innerHTML.split(":");
@@ -188,7 +186,16 @@ function adjTimeLine(e)
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
     var hours=parseInt((m2-m1)/60);
-    var tenths=get5MinuteTenths((m2-m1)%60);
+    alert(hours);
+    var tenths="";
+    if (info=="5M")
+    {
+        tenths=get5MinuteTenths((m2-m1)%60);
+    }
+    else if (info=="6M")
+    {
+        tenths=get6MinuteTenths((m2-m1)%60);
+    }
     c4.innerHTML = (hours + tenths).toFixed(1);
     sumTableHoursCol(table.id);
     return;
@@ -199,7 +206,7 @@ function adjTimeLine(e)
     }
 }
 
-/* SUM TOTAL OF COLUMN "HRS." */
+/* SUM TOTAL OF COLUMN "HRS" */
 function sumTableHoursCol(e)
 {
     var table=document.getElementById(e);
@@ -237,7 +244,6 @@ function addTimeTable()
     table.setAttribute("cellspacing","0");
     table.setAttribute("cellpadding","5");
     table.id="Table_"+(getTableCount()+1);
-    //table.style.padding="auto";
     table.style.margin="auto";
     table.style.marginTop="1.5em";
     table.style.marginBottom="1.5em";
@@ -308,22 +314,30 @@ function addTimeTable()
 
     /* Cell0 for "Total:" label */
     var cell0=row.insertCell(0);
-    cell0.className="footer";
-    cell0.setAttribute("colspan","4");
-    cell0.style.textAlign="right";
+    cell0.setAttribute("colspan","3");
+    cell0.style.fontWeight="bold";
+    cell0.style.color="navy";
+    cell0.style.textAlign="left";
     cell0.style.borderRight="none";
 
     /* Interval indicator */
-    cell0.innerHTML='<span id="'+ table.id +'_mincrements">'+ inc +'</span><b>Total: </b>';
     cell0.setAttribute("id", table.id+"_info");
+    cell0.innerHTML=inc;
 
-    /* Cell1 for calculated "Total" hours */
+    /* Cell1 for label "Total" */
     var cell1=row.insertCell(1);
-    //cell0.className="footer";
+    //cell1.className="footer";
     cell1.style.textAlign="right";
-    cell1.style.paddingRight="5px";
     cell1.style.borderLeft="none";
-    cell1.setAttribute("id", table.id+"_footer");
+    cell1.style.borderRight="none";
+    cell1.innerHTML='<b>Total: </b>';
+
+    /* Cell2 for calculated hours */
+    var cell2=row.insertCell(2);
+    cell2.style.textAlign="right";
+    cell2.style.paddingRight="5px";
+    cell2.style.borderLeft="none";
+    cell2.setAttribute("id", table.id+"_footer");
 }
 
 /* ADD NEW ROW TO SELECTED TIME TABLE */
@@ -450,7 +464,7 @@ function get5MinuteTenths(m)
 
 /*
  * CONVERT 6 MINUTE INTERVALS TO 10ths OF AN HOUR
- * Range 0.0 to 1.0
+ * Range 0.1 to 1.0
  */
 function get6MinuteTenths(m)
 {
