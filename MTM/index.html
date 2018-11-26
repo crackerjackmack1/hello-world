@@ -48,7 +48,6 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 .grid-item {
     width:100%;
     height:100%;
-    background-color: none;
     color:black;
     border: 2px solid white;
     padding: 5px;
@@ -128,9 +127,6 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
 <div id="stable"></div>
 
-<br>
-<br>
-
 <!--  ***BEGIN VERSIONING  -->
 <div class="foot"><p id="VERSION"></p></div>
 <!--  ***END VERSIONING  -->
@@ -144,9 +140,6 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 var d=new Date();
 var dateFormat="";
 var today="";
-
-/* Name of currrent table having focus */
-var curTable="";
 
 /* References to <input type="time"> controls */
 var time1=document.getElementById("startTime");
@@ -181,16 +174,22 @@ function setTimeInputs()
 function adjTimeLine(e)
 {
     var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
+    //var footer=document.getElementById(table.id+"_footer").cells[0]
+    var info=document.getElementById(table.id +"_mincrements")//.rows[0].cells[0].innerHTML;
+    alert(info.innerHTML);
     var c2=table.rows[e.parentNode.rowIndex].cells[2];
     var c3=table.rows[e.parentNode.rowIndex].cells[3];
     var c4=table.rows[e.parentNode.rowIndex].cells[4];
+    //var mIncrements=
+
     updateCells();
     var t1=c2.innerHTML.split(":");
     var t2=c3.innerHTML.split(":");
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
-    var mIntervals="";
-    c4.innerHTML = (parseInt((m2-m1)/60) + get5MinuteTenths((m2-m1)%60)).toFixed(1);
+    var hours=parseInt((m2-m1)/60);
+    var tenths=get5MinuteTenths((m2-m1)%60);
+    c4.innerHTML = (hours + tenths).toFixed(1);
     sumTableHoursCol(table.id);
     return;
     function updateCells()
@@ -231,20 +230,17 @@ function addTimeTable()
     var inc=document.getElementById("increments5").checked?"5M":"6M";
     /* Prompt for Table name */
     var tablename=prompt("Enter a name for the new table.",today);
-    if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
+    if (!tablename) {return}
 
     /* Create a Table */
     var table=document.createElement("TABLE");
     table.setAttribute("cellspacing","0");
     table.setAttribute("cellpadding","5");
-    table.id=curTable="Table_"+(getTableCount()+1);
-    table.style.padding="auto";
+    table.id="Table_"+(getTableCount()+1);
+    //table.style.padding="auto";
     table.style.margin="auto";
     table.style.marginTop="1.5em";
     table.style.marginBottom="1.5em";
-    table.onfocus="curTable=this.id";
-    table.onclick=function(){curTable=this.id;}
-    table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
 
     /* Table name header row */
@@ -256,7 +252,7 @@ function addTimeTable()
     th.style.fontSize="14pt"
     th.style.width="0.5cm";
     th.style.color="white";
-    th.onclick=function(){deleteMyTable(this);}
+    th.onclick=function(){deleteMyTable(table.id);}
     th.innerHTML="&#10003;";
 
     /* Table name header cell */
@@ -318,11 +314,12 @@ function addTimeTable()
     cell0.style.borderRight="none";
 
     /* Interval indicator */
-    cell0.innerHTML='<span id="mincrements">'+ inc +'</span><b>Total: </b>';
+    cell0.innerHTML='<span id="'+ table.id +'_mincrements">'+ inc +'</span><b>Total: </b>';
+    cell0.setAttribute("id", table.id+"_info");
 
     /* Cell1 for calculated "Total" hours */
     var cell1=row.insertCell(1);
-    cell0.className="footer";
+    //cell0.className="footer";
     cell1.style.textAlign="right";
     cell1.style.paddingRight="5px";
     cell1.style.borderLeft="none";
@@ -364,28 +361,28 @@ function addTimeLine(e)
     td0.className="point";
     td0.style.fontSize="14pt";
     td0.style.color="black";
-    td0.onclick=function(){deleteMyRow(this);}
+    td0.onclick=function(){deleteMyRow(this); sumTableHoursCol(table.id)}
     td0.innerHTML="&#10003;";
 
     /* Description cell */
     var td1=row.insertCell(1);
     td1.className="description point";
     td1.style.textAlign="left";
-    td1.ondblclick=function(){this.innerHTML=prompt("Enter description",this.innerHTML);}
+    td1.ondblclick=function(){this.innerHTML=prompt("Enter description",this.innerHTML)}
     td1.innerHTML="Job #" + (rc-3);
 
     /* Start time cell */
     var td2=row.insertCell(2);
     td2.className="point";
     td2.style.textAlign="center";
-    td2.ondblclick=function(){adjTimeLine(this);}
+    td2.ondblclick=function(){adjTimeLine(this)}
     td2.innerHTML=time1.value;
 
     /* Stop time cell */
     var td3=row.insertCell(3);
     td3.className="point";
     td3.style.textAlign="center";
-    td3.ondblclick=function(){adjTimeLine(this);}
+    td3.ondblclick=function(){adjTimeLine(this)}
     td3.innerHTML=time2.value;
 
     /* Hrs & 10ths cell */
@@ -393,7 +390,7 @@ function addTimeLine(e)
     td4.className="totalhours point";
     td4.style.textAlign="right";
     td4.style.paddingRight="5px";
-    td4.ondblclick=function(){addTimeLine(this);}
+    td4.ondblclick=function(){addTimeLine(this)}
     td4.innerHTML=decimaltime.innerHTML;
 
     /* Calculate & update "Total" */
@@ -472,16 +469,13 @@ function get6MinuteTenths(m)
 }
 
 /* DELETE TABLE */
-function deleteMyTable(e) {var child=document.getElementById(e.parentNode.parentNode.parentNode.id); stable.removeChild(child); }
+function deleteMyTable(tname) {stable.removeChild(document.getElementById(tname));}
 
 /* DELETE ROW */
-function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(e.parentNode.parentNode.parentNode.id); }
+function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex);}
 
 /* RETURN VISIBLE TABLES COUNT */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
-
-/* RETURN ROW COUNT IN CURRENT TABLE */
-function getRowCount(){return document.getElementById(curTable).rows.length;}
 
 /* DISPLAY VERSION NUMBER */
 function setVersion()
