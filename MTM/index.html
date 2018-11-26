@@ -24,7 +24,7 @@ table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
 input[type="radio"] {margin-top: 1px}
-label {font-weight:bold; font-size:12pt; vertical-align:text-top;}
+label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 .tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
@@ -106,18 +106,21 @@ label {font-weight:bold; font-size:12pt; vertical-align:text-top;}
     </div>
 
     <div class="grid-item">
-        <b>D<small>ate</small>/N<small>ame</small></b><br />
+        <!--b>D<small>ate</small>/N<small>ame</small></b><br /-->
+        <b>Date/Name</b><br />
         <input type="radio" name="dateformat" id="dateformat1" value="true" onclick="today=d.toDateString()" checked /><label for="dateformat1">Long&thinsp;</label><br />
         <input type="radio" name="dateformat" id="dateformat2" value="false" onclick="today=d.toLocaleDateString()"  /><label for="dateformat2">Short</label>
     </div>
 
     <div class="grid-item">
-        <b>A<small>dd</small></b><br />
+        <!--b>A<small>dd</small></b><br /-->
+        <b>Add</b><br />
         <input type="button" value="Table" onclick="addTimeTable(); this.blur();" />
     </div>
 
     <div class="grid-item">
-        <b>I<small>ntervals</small></b><br />
+        <!--b>I<small>ntervals</small></b><br /-->
+        <b>Intervals</b><br />
         <input type="radio" name="increments" id="increments5" checked /><label for="increments5">5 min</label><br />
         <input type="radio" name="increments" id="increments6"         /><label for="increments6">6 min</label>
     </div>
@@ -188,7 +191,7 @@ function adjTimeLine(e)
     var m2=Number(t2[0] * 60) + Number(t2[1]);
     var mIntervals="";
     c4.innerHTML = (parseInt((m2-m1)/60) + get5MinuteTenths((m2-m1)%60)).toFixed(1);
-    sumTableHoursCol(table);
+    sumTableHoursCol(table.id);
     return;
     function updateCells()
     {
@@ -394,7 +397,7 @@ function addTimeLine(e)
     td4.innerHTML=decimaltime.innerHTML;
 
     /* Calculate & update "Total" */
-    sumTableHoursCol();
+    sumTableHoursCol(table.id);
 }
 
 /*
@@ -472,7 +475,7 @@ function get6MinuteTenths(m)
 function deleteMyTable(e) {var child=document.getElementById(e.parentNode.parentNode.parentNode.id); stable.removeChild(child); }
 
 /* DELETE ROW */
-function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(); }
+function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(e.parentNode.parentNode.parentNode.id); }
 
 /* RETURN VISIBLE TABLES COUNT */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
