@@ -24,7 +24,7 @@ table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
 input[type="radio"] {margin-top: 1px}
-label {font-weight:bold; font-size:12px; vertical-align:text-top;}
+label {font-weight:bold; font-size:12pt; vertical-align:text-top;}
 .tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
@@ -62,6 +62,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     background-color: navy;
     color:yellow;
 }
+#mincrements {float:left; font-weight:bold; color:navy;}
 
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:12pt; font-weight:bold;}
@@ -106,8 +107,8 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
     <div class="grid-item">
         <b>D<small>ate</small>/N<small>ame</small></b><br />
-        <input type="radio" name="dateformat" id="dateformat" value="true" onclick="today=d.toDateString()" checked /><label>Long&thinsp;</label><br />
-        <input type="radio" name="dateformat" value="false" onclick="today=d.toLocaleDateString()" /><label>Short</label>
+        <input type="radio" name="dateformat" id="dateformat1" value="true" onclick="today=d.toDateString()" checked /><label for="dateformat1">Long&thinsp;</label><br />
+        <input type="radio" name="dateformat" id="dateformat2" value="false" onclick="today=d.toLocaleDateString()"  /><label for="dateformat2">Short</label>
     </div>
 
     <div class="grid-item">
@@ -117,8 +118,8 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
     <div class="grid-item">
         <b>I<small>ntervals</small></b><br />
-        <input type="radio" name="incrementes" id="incminutes" onclick="" checked /><label>5 min</label><br />
-        <input type="radio" name="incrementes" value="false" onclick="" /><label>6 min</label>
+        <input type="radio" name="increments" id="increments5" checked /><label for="increments5">5 min</label><br />
+        <input type="radio" name="increments" id="increments6"         /><label for="increments6">6 min</label>
     </div>
 </div>
 
@@ -216,7 +217,7 @@ function getDateForTableName()
    * 1 = short (mm/dd/YYYY)
    * NOTE: Incorporate with localStorage.methods()
    */
-  var radio=document.getElementById("dateformat");
+  var radio=document.getElementById("dateformat1");
   dateFormat=radio.checked?0:1;
   today=dateFormat?d.toLocaleDateString():d.toDateString();
 }
@@ -224,6 +225,7 @@ function getDateForTableName()
 /* ADD NEW TIME TABLE */
 function addTimeTable()
 {
+    var inc=document.getElementById("increments5").checked?"5M":"6M";
     /* Prompt for Table name */
     var tablename=prompt("Enter a name for the new table.",today);
     if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
@@ -311,7 +313,9 @@ function addTimeTable()
     cell0.setAttribute("colspan","4");
     cell0.style.textAlign="right";
     cell0.style.borderRight="none";
-    cell0.innerHTML='<b>Total: </b>';
+
+    /* Interval indicator */
+    cell0.innerHTML='<span id="mincrements">'+ inc +'</span><b>Total: </b>';
 
     /* Cell1 for calculated "Total" hours */
     var cell1=row.insertCell(1);
