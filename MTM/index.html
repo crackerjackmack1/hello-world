@@ -185,6 +185,7 @@ function adjTimeLine(e)
     var t2=c3.innerHTML.split(":");
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
+<<<<<<< HEAD
     var result=0;
 
     alert(info.innerHTML);
@@ -200,6 +201,11 @@ function adjTimeLine(e)
 
     c4.innerHTML = result.toFixed(1);
     sumTableHoursCol(table.id);
+=======
+    var mIntervals="";
+    c4.innerHTML = (parseInt((m2-m1)/60) + get5MinuteTenths((m2-m1)%60)).toFixed(1);
+    sumTableHoursCol(table);
+>>>>>>> 35cf961640fa4b174efe79eefe2cf6c426341b0f
     return;
     function updateCells()
     {
@@ -208,7 +214,11 @@ function adjTimeLine(e)
     }
 }
 
+<<<<<<< HEAD
 /* SUM TOTAL OF COLUMN "HRS" */
+=======
+/* SUM TOTAL OF COLUMN "HRS." */
+>>>>>>> 35cf961640fa4b174efe79eefe2cf6c426341b0f
 function sumTableHoursCol(e)
 {
     var table=document.getElementById(e);
@@ -410,7 +420,11 @@ function addTimeLine(e)
     td4.innerHTML=decimaltime.innerHTML;
 
     /* Calculate & update "Total" */
+<<<<<<< HEAD
     sumTableHoursCol(table.id);
+=======
+    sumTableHoursCol();
+>>>>>>> 35cf961640fa4b174efe79eefe2cf6c426341b0f
 }
 
 /*
