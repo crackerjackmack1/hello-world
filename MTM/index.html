@@ -188,7 +188,7 @@ function adjTimeLine(e)
     var m2=Number(t2[0] * 60) + Number(t2[1]);
     var mIntervals="";
     c4.innerHTML = (parseInt((m2-m1)/60) + get5MinuteTenths((m2-m1)%60)).toFixed(1);
-    sumTableHoursCol();
+    sumTableHoursCol(table);
     return;
     function updateCells()
     {
@@ -198,9 +198,9 @@ function adjTimeLine(e)
 }
 
 /* SUM TOTAL OF COLUMN "HRS." */
-function sumTableHoursCol()
+function sumTableHoursCol(e)
 {
-    var table=document.getElementById(curTable);
+    var table=document.getElementById(e);
     var f=document.getElementById(table.id+"_footer");
     var total=0;
     var tds=table.getElementsByClassName("totalhours");
@@ -397,20 +397,11 @@ function addTimeLine(e)
     sumTableHoursCol();
 }
 
-/* Insert row below the selected row index */
-function insertRowBelow(e)
-{
-    curTable=e.parentNode.parentNode.parentNode.id;
-    var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    var n=e.parentNode.rowIndex;
-    addTimeLine(n+1);
-}
-
 /*
  * Calculate total time spent in hours & tenths of
  * an hour & report result.
  */
-function getTotalTime()
+function getTotalTime(e)
 {
     /*
      * Reference the "time" <input> elements and split them into string arrays
