@@ -184,15 +184,16 @@ function adjTimeLine(e)
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
 
-    var result=0;
+    var result="0.0";
 
-    if (m1<m2)
+    if (m2>m1)
     {
-        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),info.innerHTML)).toFixed(1);
+        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);
     }
     else if (m1>m2)
     {
-        var result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m1-m2)%60),info.innerHTML)).toFixed(1));
+        setTimeInputs(e);
+        alert("YIKES!\nYou can't do that. Please check the Start Time");
     }
     else
     {
@@ -439,14 +440,17 @@ function getTotalTime(mode)
     /* Alias' to hold strings converted to Number() for calculations */
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
+
+    var result="0.0";
+
     if (m2>m1)
     {
-        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);
+        result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);
     }
     else if (m1>m2)
     {
-        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);
-        alert("YIKES!\nPlease the AM/PM field of Star Time")
+        setTimeInputs(e);
+        alert("YIKES!\nYou can't do that. Please check the Start Time");
     }
     else
     {
