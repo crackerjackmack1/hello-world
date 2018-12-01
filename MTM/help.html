@@ -17,40 +17,49 @@
 /*<![CDATA[*/
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; box-sizing:border-box; text-align:left;}
 body {padding: 10px;}
-h3,p {padding:5px;}
+input[type="button"]{height:auto; width:auto;}
+p {font-size:12pt; padding-bottom:5px;}
+li p {padding-bottom:0px;}
+navy {color:navy; font-weight:600;}
 /*]]>*/
 </style>
 
 </head>
 
 <body>
-    <h3>Editing Time Tables</h3>
+    <h1>Editing Time Tables</h1>
+    <small>Best viewed in Firefox, Chrome, etc.</small>
     <p>
-        <small>
-            Best viewed in Firefox, Chrome, etc.
-        </small>
-    </p>
-    <p>
-        <b>Creating / Deleting Time Tables</b><br>
-        <i>Click</i> the [Table] button to create a new table and give it a name. Note:
-        Tables without names will not be created.
-    </p>
-    <p>
-        IMPORTANT! Multiple tables can be created, however, <i>a table must have focus
-        before lines can be added to or deleted from it</i>.
-    </p>
-    <p>
-        The default name for new tables will be in one of the following formats:
+        <h3>Creating Time Tables</h3>
+        To create one or more tables on the page:
         <ol>
-            <li>Long date: <i>Wed Nov 21 2018</i> (default)</li>
-            <li>Short date: <i>11/21/2018</i></li>
+            <li>Under <navy>"Date/Name"</navy> choose <navy>"Long"</navy> or <navy>"Short"</navy> for the date name that will appear in the table header.</li>
+            <li>
+                Under <navy>"Intervals"</navy> choose <navy>"5 min"</navy> or <navy>"6 min"</navy> for the length of interval to use in calculations for the table.<br />
+                <i><navy>Note:</navy> Each table's interval length is shown in botton left corner.</i>
+            </li>
+            <li>Press the <navy>"Table"</navy> button to create a new table.</li>
+            <li>Use either the default <navy>"Name"</navy> that appears in the dialog box or modify it as needed.
+                <p>
+                    The default name for new tables will be in one of the following formats:
+                    <ul>
+                        <li><navy>Long date:</navy> <i>Wed Nov 21 2018</i></li>
+                        <li><navy>Short date:</navy> <i>11/21/2018</i></li>
+                    </ul>
+                    <i>Tables will not be created without names.</i>
+                </p>
+            </li>
+            <li>Click "OK"</li>
         </ol>
-        <br>
-        <i>Click</i> the checkmark in a table's header to delete the table.
     </p>
+    <p>
+        <h3>Deleting Time Tables</h3>
+        To remove a table form the page <navy>"ClicK"</navy> the &#10006; in the upper right corner of the table header.
+    </p>
+    
     <p>
         <b>Adding / Deleting Time Lines</b><br>
-        <i>Click</i> or <i>Tap</i> [Line] button. The new Line will contain
+        <i>Click</i> the checkmark in the upper left of the table. The new Line will contain
         the current time in the "Start" cell, and the "Stop" cell will contain
         "Start" time +1 hour.
     </p>
