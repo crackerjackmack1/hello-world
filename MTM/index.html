@@ -445,7 +445,8 @@ function getTotalTime(mode)
     }
     else if (m1>m2)
     {
-        var result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m1-m2)%60),mode)).toFixed(1));
+        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);
+        alert("YIKES!\nPlease the AM/PM field of Star Time")
     }
     else
     {
