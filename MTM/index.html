@@ -59,7 +59,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     color:yellow;
 }
 #mincrements {float:left; font-weight:bold; color:navy;}
-.help {position:fixed; right:0; top:0; width:auto; background-color:ccc; color:blue; text-align:center; border:1px solid blue; text-decoration:none; margin:3px;}
+.help {position:fixed; right:0; top:0; width:auto; background-color:#ccc; color:blue; text-align:center; border:1px solid blue; text-decoration:none; margin:3px;}
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:12pt; font-weight:bold;}
 #stable {width:auto; margin:auto; margin-bottom:75px;}
@@ -81,7 +81,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
 </head>
 
-<body onload="getTotalTime();">
+<body>
 
 <!-- TODO: code for fixed menu bar here -->
 
@@ -165,7 +165,7 @@ function setTimeInputs(e)
         if (i<10){i="0"+i;}
         return i;
     }
-    getTotalTime(info.innerHTML);
+    //getTotalTime(info.innerHTML);
 }
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
@@ -184,7 +184,7 @@ function adjTimeLine(e)
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
 
-    var result=0;
+    var result="0.0";
 
     if (m1<m2)
     {
@@ -422,21 +422,21 @@ function addTimeLine(e)
 
 /*
  * Calculate total time spent in hours & tenths of an hour.
- */
+ *
 function getTotalTime(mode)
 {
     /*
      * Reference the "time" <input> elements and split them into string arrays
      * t1[0] & t2[0] contain hours
      * t1[1] & t2[1] contain minutes
-     */
+     *
     var t1=time1.value.split(":");
     var t2=time2.value.split(":");
 
-    /* Alias <p> tag */
+    /* Alias <p> tag *
     var p=document.getElementById("total");
 
-    /* Alias' to hold strings converted to Number() for calculations */
+    /* Alias' to hold strings converted to Number() for calculations *
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
     if (m2>m1)
@@ -452,11 +452,12 @@ function getTotalTime(mode)
         result="0.0";
     }
 
-    /* Displays calculated result in the <p> tag */
+    /* Displays calculated result in the <p> tag *
     p.innerHTML=result;
 
     return result;
 }
+*/
 
 /* CONVERT MINUTES TO 10ths OF AN HOUR */
 function get10ths(minutes,mode)
