@@ -2,14 +2,11 @@
 <html>
 <head>
 <title id="MYTITLE"></title>
-<meta name="author" content="J.G. McCracken">
-<meta name="copyright" content="©2010-2018 My Time Machine (MTM), Johnny G. McCracken, All rights reserved.">
-<meta name="keywords" content="">
-<meta name="description" content="A web-based personal project/job time tracking utility">
-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
-<meta http-equiv="content-style-type" content="text/css">
+<meta name="author" content="J.G. McCracken" /><meta name="copyright" content="©2010-2018 My Time Machine (MTM), Johnny G. McCracken, All rights reserved." />
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta http-equiv="content-style-type" content="text/css" />
 <meta name="version" content="MY TIME MACHINE v1.4.1-1g" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -22,7 +19,8 @@ td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid g
 td.totalhours:hover{background-color:yellow;}
 input[type="radio"] {margin-top: 1px}
 label {font-weight:bold; font-size:12px; vertical-align:text-top;}
-.tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
+.tablenamecolor, .closetable {background-color: #000080; color:white; font-weight:bold;}
+
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
 
@@ -36,8 +34,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 }
 .grid-container {
     display: inline-grid;
-    /* Using both col & row */
-    grid-gap: 5px 0px;
+    grid-gap: 5px 0px; /* Using both col & row */
     padding: 0px;
     margin: 0px;
 }
@@ -59,7 +56,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     color:yellow;
 }
 #mincrements {float:left; font-weight:bold; color:navy;}
-.help {position:fixed; right:0; top:0; width:auto; background-color:#ccc; color:blue; text-align:center; border:1px solid blue; text-decoration:none; margin:3px;}
+.help {position:fixed; right:0; top:0; width:auto; background-color:ccc; color:blue; text-align:center; border:1px solid blue; text-decoration:none; margin:3px;}
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:12pt; font-weight:bold;}
 #stable {width:auto; margin:auto; margin-bottom:75px;}
@@ -73,15 +70,16 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     tr {page-break-inside:avoid;}
     #VERSION {display:none;}
     .tablenamecolor {background-color: white; color:black;}
+    .closetable {background-color: white; color:white;}
     .description {width:400px;}
-    .grid-container, div.foot {display:none;}
+    .grid-container, a.help, div.foot {display:none;}
 }
 /*]]>*/
 </style>
 
 </head>
 
-<body>
+<body id="bod" onload="getTotalTime();">
 
 <!-- TODO: code for fixed menu bar here -->
 
@@ -105,8 +103,8 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
     <div class="grid-item">
         <b>Date/Name</b><br />
-        <input type="radio" name="dateformat" id="dateformat1" value="true" onclick="today=d.toDateString()" checked /><label for="dateformat1">Long&thinsp;</label><br />
-        <input type="radio" name="dateformat" id="dateformat2" value="false" onclick="today=d.toLocaleDateString()" /><label for="dateformat2">Short</label>
+        <input type="radio" name="dateformat" id="dateformat1" value="true"  title="Long date name"  onclick="today=d.toDateString()" checked /><label for="dateformat1" title="Long date name" >Long&thinsp;</label><br />
+        <input type="radio" name="dateformat" id="dateformat2" value="false" title="Short date name" onclick="today=d.toLocaleDateString()"   /><label for="dateformat2" title="Short date name">Short</label>
     </div>
 
     <div class="grid-item">
@@ -116,8 +114,8 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
     <div class="grid-item">
         <b>Intervals</b><br />
-        <input type="radio" name="increments" id="increments5" checked /><label for="increments5">5 min</label><br />
-        <input type="radio" name="increments" id="increments6" /><label for="increments6">6 min</label>
+        <input type="radio" name="increments" id="increments5" title="5 minute intervals" checked /><label for="increments5" title="5 minute intervals">5 min</label><br />
+        <input type="radio" name="increments" id="increments6" title="6 minute intervals" /><label for="increments6" title="6 minute intervals">6 min</label>
     </div>
 </div>
 
@@ -154,7 +152,7 @@ var stable=document.getElementById("stable");
 function setTimeInputs(e)
 {
     var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    var info=document.getElementById(table.id +"_info");
+    var mode=table.id.substr(0,2);
     var d=new Date();
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
@@ -165,14 +163,14 @@ function setTimeInputs(e)
         if (i<10){i="0"+i;}
         return i;
     }
-    //getTotalTime(info.innerHTML);
+    getTotalTime(mode);
 }
 
 /* CALCULATE TOTAL HOURS FOR A ROW */
 function adjTimeLine(e)
 {
     var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    var info=document.getElementById(table.id +"_info");
+    var mode=table.id.substr(0,2);
 
     var c2=table.rows[e.parentNode.rowIndex].cells[2];
     var c3=table.rows[e.parentNode.rowIndex].cells[3];
@@ -184,20 +182,9 @@ function adjTimeLine(e)
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
 
-    var result="0.0";
-
-    if (m1<m2)
-    {
-        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),info.innerHTML)).toFixed(1);
-    }
-    else if (m1>m2)
-    {
-        var result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m1-m2)%60),info.innerHTML)).toFixed(1));
-    }
-    else
-    {
-        result="0.0";
-    }
+    if (m2>m1) {var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
+    else if (m1>m2) {var result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m1-m2)%60),mode)).toFixed(1));}
+    else {result="0.0";}
     
     c4.innerHTML=result;
     
@@ -241,7 +228,9 @@ function getDateForTableName()
 /* ADD NEW TIME TABLE */
 function addTimeTable()
 {
+    /* First part of table id is the miniute increment */
     var inc=document.getElementById("increments5").checked?"5M":"6M";
+    
     /* Prompt for Table name */
     var tablename=prompt("Enter a name for the new table.",today);
     if (!tablename) {return}
@@ -250,7 +239,7 @@ function addTimeTable()
     var table=document.createElement("TABLE");
     table.setAttribute("cellspacing","0");
     table.setAttribute("cellpadding","5");
-    table.id="Table_"+(getTableCount()+1);
+    table.id=inc + "_Table_"+(getTableCount()+1);
     table.style.margin="auto";
     table.style.marginTop="0.5em";
     table.style.marginBottom="1.5em";
@@ -271,7 +260,6 @@ function addTimeTable()
     var th=row.insertCell(1);
     th.className="tablenamecolor point";
     th.style.fontSize="16pt"
-    //th.style.width="0.5cm";
     th.style.color="white";
     th.style.borderLeft="none";
     th.onclick=function(){deleteMyTable(table.id);}
@@ -335,7 +323,6 @@ function addTimeTable()
 
     /* Cell1 for label "Total" */
     var cell1=row.insertCell(1);
-    //cell1.className="footer";
     cell1.style.textAlign="right";
     cell1.style.borderLeft="none";
     cell1.style.borderRight="none";
@@ -422,42 +409,33 @@ function addTimeLine(e)
 
 /*
  * Calculate total time spent in hours & tenths of an hour.
- *
+ */
 function getTotalTime(mode)
 {
     /*
      * Reference the "time" <input> elements and split them into string arrays
      * t1[0] & t2[0] contain hours
      * t1[1] & t2[1] contain minutes
-     *
+     */
     var t1=time1.value.split(":");
     var t2=time2.value.split(":");
 
-    /* Alias <p> tag *
+    /* Alias <p> tag */
     var p=document.getElementById("total");
 
-    /* Alias' to hold strings converted to Number() for calculations *
+    /* Alias' to hold strings converted to Number() for calculations */
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
-    if (m2>m1)
-    {
-        var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);
-    }
-    else if (m1>m2)
-    {
-        var result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m1-m2)%60),mode)).toFixed(1));
-    }
-    else
-    {
-        result="0.0";
-    }
+    
+    if (m2>m1) {var result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
+    else if (m1>m2) {var result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m1-m2)%60),mode)).toFixed(1));}
+    else {result="0.0";}
 
-    /* Displays calculated result in the <p> tag *
+    /* Displays calculated result in the <p> tag */
     p.innerHTML=result;
 
     return result;
 }
-*/
 
 /* CONVERT MINUTES TO 10ths OF AN HOUR */
 function get10ths(minutes,mode)
@@ -486,9 +464,10 @@ function get10ths(minutes,mode)
     /*
      * CONVERT 6 MINUTE INTERVALS TO 10ths OF AN HOUR
      */
-    else
+    else if(mode=="6M")
     {
-             if (m>0  && m<=6) {tenths="0.1"}
+             if (m==0) {tenths="0.0"}
+        else if (m>0  && m<=6) {tenths="0.1"}
         else if (m>6  && m<=12){tenths="0.2"}
         else if (m>12 && m<=18){tenths="0.3"}
         else if (m>18 && m<=24){tenths="0.4"}
@@ -527,4 +506,3 @@ getDateForTableName();
 </script>
 
 </html>
-
