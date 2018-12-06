@@ -185,7 +185,7 @@ function adjTimeLine(e)
     //TODO: Fix this and the other one too @432
     var result="";
     if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
-    //else if (m1>m2) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
+    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1));}
     else {result="0.0";}
     
     c4.innerHTML=result;
@@ -431,7 +431,7 @@ function getTotalTime(mode)
     //TODO: Fix this and the other one too @ 185
     var result="";
     if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
-    else if (m1>m2) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
+    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1));}
     else {result="0.0";}
 
     /* Displays calculated result in the <p> tag */
