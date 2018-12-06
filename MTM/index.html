@@ -189,6 +189,8 @@ function adjTimeLine(e)
     else {result="0.0";}
     
     c4.innerHTML=result;
+
+    decimaltime.innerHTML=result;
     
     sumTableHoursCol(table.id);
     
@@ -423,7 +425,7 @@ function getTotalTime(mode)
     var t2=time2.value.split(":");
 
     /* Alias <p> tag */
-    var p=document.getElementById("total");
+    //var p=document.getElementById("total");
 
     /* Alias' to hold strings converted to Number() for calculations */
     var m1=Number(t1[0] * 60) + Number(t1[1]);
@@ -436,7 +438,7 @@ function getTotalTime(mode)
     else {result="0.0";}
 
     /* Displays calculated result in the <p> tag */
-    p.innerHTML=result;
+    decimaltime.innerHTML=result;
 
     return result;
 }
