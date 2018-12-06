@@ -185,7 +185,7 @@ function adjTimeLine(e)
     //TODO: Fix this and the other one too @432
     var result="";
     if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
-    else if (m1>m2) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
+    //else if (m1>m2) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
     else {result="0.0";}
     
     c4.innerHTML=result;
@@ -266,7 +266,7 @@ function addTimeTable()
     th.style.fontSize="16pt"
     th.style.color="white";
     th.style.borderLeft="none";
-    th.onclick=function(){deleteMyTable(table.id);}
+    th.onclick=function(){removeTimeTable(table.id);}
     th.innerHTML="&#10006;";
     
     /* Column headers row */
@@ -375,7 +375,7 @@ function addTimeLine(e)
     td0.className="point";
     td0.style.fontSize="14pt";
     td0.style.color="black";
-    td0.onclick=function(){deleteMyRow(this); sumTableHoursCol(table.id)}
+    td0.onclick=function(){removeTimeLine(this); sumTableHoursCol(table.id)}
     td0.innerHTML="&#10003;";
 
     /* Description cell */
@@ -423,9 +423,6 @@ function getTotalTime(mode)
      */
     var t1=time1.value.split(":");
     var t2=time2.value.split(":");
-
-    /* Alias <p> tag */
-    //var p=document.getElementById("total");
 
     /* Alias' to hold strings converted to Number() for calculations */
     var m1=Number(t1[0] * 60) + Number(t1[1]);
@@ -488,10 +485,10 @@ function get10ths(minutes,mode)
 }
 
 /* DELETE TABLE */
-function deleteMyTable(tname) {stable.removeChild(document.getElementById(tname));}
+function removeTimeTable(tname) {stable.removeChild(document.getElementById(tname));}
 
 /* DELETE ROW */
-function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex);}
+function removeTimeLine(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex);}
 
 /* RETURN VISIBLE TABLES COUNT */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
