@@ -35,65 +35,91 @@ navy {color:navy; font-weight:600;}
     <h3>Creating &amp; Deleting Time Tables</h3>
 
     <p>
-        To create one or more tables on the page:
+        <b>To Create a Time Table...</b>
         <ol>
-            <li>Under <navy>"Date/Name"</navy> choose <navy>"Long"</navy> or <navy>"Short"</navy> for the date name that will appear in the table header.</li>
-            <li>
-                Under <navy>"Intervals"</navy> choose <navy>"5 min"</navy> or <navy>"6 min"</navy> for the length of interval to use in calculations for the table.<br />
-                <navy>Note:</navy> Interval lengths are shown in botton left corner.
-            </li>
-            <li>Press the <navy>"Table"</navy> button to create a new table.</li>
-            <li>Use the default <navy>"Name"</navy> that appears in the dialog box or modify it as needed.
-                The default name for new tables will be in one of the following formats:
-                <ul>
-                    <li><navy>Long date:</navy> <i>Wed Nov 21 2018</i></li>
-                    <li><navy>Short date:</navy> <i>11/21/2018</i></li>
+            <li>Under the <navy>"Date/Name"</navy> heading, choose the date name style that will appear in the table header.
+                <ul style="list-style-type: none;">
+                    <li><input type="radio" name="r1" checked />Long date (<i>Wed Nov 21 2018 default</i>)</li>
+                    <li><input type="radio" name="r1" />Short date (<i>11/21/2018</i>)</li>
                 </ul>
                 <navy>Note:</navy> Tables will not be created without names.
             </li>
-            <li>Click <navy>"OK"</navy></li>
+
+            <li>
+                Under the <navy>"Intervals"</navy> heading choose the length of interval to use in calculations for the table.
+                <ul style="list-style-type: none;">
+                    <li><input type="radio" name="r2" checked />5 min (<i>5 minutes default</i>)</li>
+                    <li><input type="radio" name="r2" />6 min (<i>6 minutes</i>)</li>
+                </ul>
+                <navy>Note:</navy> Interval lengths are displayed as <i>"5M"</i> or <i>"6M"</i> in bottom left corner of a table,
+            </li>
+
+            <li><i>Click</i> the <input type="button" value="Table" /> button to continue.</li>
+
+            <li>A <i>Dialog Box</i> will open allowing the user to edit the name of the table.</li>
+
+            <li><i>Click</i> <navy>"OK"</navy> to create the table.</li>
         </ol>
     </p>
 
     <p>
-        To remove a table from the page <navy>"Click"</navy> the &#10006; in the upper right corner.
+        <b>To Edit a Table's Name...</b>
+        <ol>
+            <li><i>Double click</i> the table's <navy>"Name Header"</navy></li>
+
+            <li>A <i>Dialog Box</i> will open allowing user to modify the table's name.</li>
+
+            <li><i>Click</i> <navy>"OK"</navy> to continue.</li>
+        </ol>
+    </p>
+
+    <p>
+        <b>To Remove a Time Table...</b>
+        <ol>
+            <li><i>Click</i> the &#10006; in the upper right corner.</li>
+        </ol>
     </p>
 
     <h3>Adding &amp; Deleting Time Lines</h3>
     
     <p>
-        To add a line at the top of a table:
+        <b>To add a Time line at the top of a table...</b>
         <ol>
-            <li><navy>Click</navy> the checkmark in the upper left of the table.</li>
-            <li>(The new Line will contain the current time in the <navy>"Start"</navy> cell, and the <navy>"Stop"</navy> cell will contain <navy>"Start"</navy> time +2 minutes.)</i></li>
+            <li><i>Click</i> the <b>&#10133;</b> to the left of the <b>"Description"</b> header.</li>
+            <li>The <navy>"New Line"</navy> will display the current time in the <navy>"Start"</navy> cell,
+                while the <navy>"Stop"</navy> cell displays the current time plus 2 minutes.)</i>
+        </li>
+        </ol>
+    </p>
+    
+    <p>
+        <b>To insert a Time line under an existing line...</b>
+        <ol>
+            <li><i>Double click</i> any <navy>"Hrs"</navy> cell to insert a new time line below the level of the clicked cell.</li>
         </ol>
     </p>
 
     <p>
-        To delete a line from a table:
+        <b>To delete a Time line from a table...</b>
         <ol>
             <li>
-                <navy>Click</navy> the checkmark next to any row to delete it.
+                Click the checkmark (<b>&#10003;</b>) at the left of any time line to delete it.
             </li>
         </ol>
     </p>
 
     <h3>Editing Time Lines</h3>
     <p>
-        <i>Double click</i> any <navy>"Description"</navy> cell to open a dialog box that allows user input.
+        <i>Double click</i> any <navy>"Description"</navy> cell to open a <i>Dialog Box</i> that allows user input.
     </p>
 
     <p>
-        <i>Double click</i> any <navy>"Start"</navy> cell to insert the current values of the time fields into the <navy>"Start"</navy> & <navy>"Stop"</navy> cells.
+        <i>Double click</i> any <navy>"Start"</navy> cell to insert the current values of the time fields into the coresponding <navy>"Start"</navy> & <navy>"Stop"</navy> cells.
     </p>
 
     <p>
         <i>Double click</i> any <navy>"Stop"</navy> cell to insert the current value of the <navy>"Stop"</navy> time field into it.
-    </p>
-
-    <h3>Inserting Time Lines</h3>
-    <p>
-        <i>Double click</i> any <navy>"Hrs"</navy> cell to insert a new row below the level of the clicked cell.
+        <br /><br />
     </p>
 
 </script>
