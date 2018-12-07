@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title id="MYTITLE"></title>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="copyright" content="©2018, MGEN is intellectual the property of J.G. McCracken, All rights reserved.">
+<meta name="Version" content="MGEN 2.1.7-3g" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="expires" content="0" />
+
+<link rel="stylesheet" type="text/css" href="mgn.css" />
+<base target="_blank">
+
+</head>
+
+<body onload="postNextRetreatDate()">
+
+<!--  BEGIN HELP BUTTON  -->
+<div style="width:100%; text-align:right;">
+	<button id="helpbtn" class="helpbtn">?</button>
+</div>
+<!--  END HELP BUTTON  -->
+
+<!--  BEGIN INFO FORM  -->
+<div id="maintable" class="grid-container">
+
+	<div id="FORM" align="center">
+		<div align="center">
+			<h2 id="header" style="font-size:4vw; margin-top:0px;">ACTS Message Generator</h2>
+			<h4 id="nextdate" style="font-size:3vw;">Men's Retreat:</h4>
+		</div>
+
+		<div class="grid-item pilgrim_name">
+			<label id="rfirstnamelabel">Retreatant:</label><br />
+			<input id="rfirstname" type="text" placeholder="Firstname" class="inputB" />
+			<input id="rlastname" type="text" placeholder="Lastname" />
+		</div>
+
+		<div class="grid-item contact_name">
+			<label id="rcontactlabel">Contact:</label>
+			<input id="rcontact" type="text" placeholder="First name" />
+		</div>
+
+		<div class="grid-item retreat_email_address">
+			<label id="rdestemaillabel">Retreat email:</label>
+			<input id="rdestemail" type="email" placeholder="Email address" value="seas.acts.houston@gmail.com" />
+		</div>
+
+		<div class="grid-item candlelight">
+			<label align="left" id="rcandlelightlabel" class="divlabl" style="display:inline;">Candlelight Ceremony: </label>
+			<input id="rcandlelight" type="time" value="19:15" style="width:auto;" />
+		</div>
+
+		<div class="grid-item prayer_partner_info">
+			<label id="rpartnerlabel">Prayer Partner:</label>
+			<input id="rpartner" type="text" placeholder="Full name" class="inputB" /><br />
+			<input id="rpartnerphone" type="tel" placeholder="Phone" class="inputB" /><br />
+			<input id="rpartneremail" type="email" placeholder="Email" />
+		</div>
+
+		<br />
+
+		<div align="center">
+			<button id="createbtn" onclick="outPutMsg()">Create Message</button>
+		</div>
+	</div>
+</div>
+<!--  END INFO FORM  -->
+
+<!--  BEGIN MESSAGE BUILD  -->
+<div id="MSGS" style="display: none;">
+	<p id="txtmsg" class="selectable" oncopy='location.reload()'></p>
+	<div align="center">
+		<button id="MSGS_btn" onclick="location.reload()">CLOSE</button><br />
+	</div>
+</div>
+<!--  END MESSAGE BUILD  -->
+
+<!--  BEGIN ENGLISH HELP SCREEN  -->
+<div id="HELP_0" style="display:none">
+	<div>
+		<h3>How to use this Utility</h3>
+		<p>To return to the main screen at anytime press "Close" at the bottom of the page, or the reload button from the browser's menu.</p>
+		<p>With this utility you can create a generic email message or a customized personal message.</p>
+		<p>
+			<ol>
+				<li>Enter the retreatant's first and last name. <i>(It will be inserted into the email subject line automatically)</i></li>
+				<li>Enter the contact person's first name. <i>(It will appear in the greeting at the top of the message)</i></li>
+				<li>The retreat email address in the form is the default and is editable</li>
+				<li>Set the time for the Candlelight ceremony</li>
+				<li>
+					Enter the Prayer Partner's information:
+					<ul>
+						<li>Full name <i>(optional)</i></li>
+						<li>Phone number <i>(optional)</i></li>
+						<li>Email address <i>(optional)</i></li>
+					</ul>
+					<i>(These items will appear at the end of the message)</i>
+				</li>
+				<li>Press the "Create Message" button</li>
+			</ol>
+		</p>
+		<p>
+			To "Copy" the text:
+			<ol>
+				<li>
+					For Android & iPhone:
+					<ul>
+						<li>Touch the message text screen until the Copy/Select menu appears</li>
+						<li>Touch the "Select All" option when it appears</li>
+						<li>Touch the "Copy" option when it appears</li>
+					</ul>
+				<li>
+					For Desktop & Laptop Computers:
+					<ul>
+						<li>Right click the message text then click "Select All"</li>
+						<li>Right click the highlighted text then click "Copy"</li>
+						<li>Press Ctrl + C</li>
+					</ul>
+				</li>
+			</ol>
+		</p>
+		<p>
+			To "Paste" the text:
+			<ol>
+				<li>
+					For All:
+					<ul>
+						<li>Open your favorite email program.</li>
+						<li>Start a new email message.</li>
+						<li>"Paste" the copied text into the body.</li>
+					</ul>
+				</li>
+				<li>Send it to the contact person.</li>
+				<li>You're finished!</li>
+			</ol>
+		</p>
+		<p>Note: The <i>"ACTS Retreat"</i> embedded email link when clicked should open the email program automatically and should have the participants full name in the subject line!</p>
+		<p>Thank you and God bless you.</p>
+	</div>
+	<div align="center">
+		<button onclick="location.reload()">&emsp;CLOSE&emsp;</button><br />
+	</div>
+</div>
+<!--  END ENGLISH HELP SCREEN  -->
+
+<!--  BEGIN SPANISH HELP SCREEN  -->
+<div id="HELP_1" style="display:none">
+	<div>
+		<h3>Cómo usar esta Herramienta</h3>
+		<p>Para volver a la pantalla principal en cualquier momento, presione "Cerrar" en la parte inferior de la página, o el botón de volver a cargar desde el menú del navegador.</p>
+		<p>Con esta utilidad, puede crear un mensaje de correo electrónico genérico o un mensaje personalizado.</p>
+		<p>
+			<ol>
+				<li>Ingrese el nombre y apellido del recabador. <i>(Se insertará automáticamente en el asunto del correo electrónico)</i></li>
+				<li>Ingrese el nombre de la persona de contacto.<i>(Aparecerá en el saludo en la parte superior del mensaje)</i></li>
+				<li>La dirección de correo electrónico de retirada en el formulario es la predeterminada y es editable.</li>
+				<li>Establezca la hora de la ceremonia Noche de Vela.</li>
+				<li>
+					Ingrese la información del compañero de oración:
+					<ul>
+						<li>Nombre completo <i>(opcional)</i></li>
+						<li>Numero de teléfono <i>(opcional)</i></li>
+						<li>Dirección de correo electrónico <i>(opcional)</i></li>
+					</ul>
+					<i>(Estos elementos aparecerán al final del mensaje)</i>
+				</li>
+			<li>Presiona el botón "Crear Mensaje"</li>
+			</ol>
+		</p>
+		<p>
+			Para "copiar" el texto:
+			<ol>
+				<li>
+					Para Android y iPhone:
+					<ul>
+						<li>Toque la pantalla de texto del mensaje hasta que aparezca el menú Copiar / Seleccionar</li>
+						<li>Toca la opción "Seleccionar todo" cuando aparezca</li>
+						<li>Toca la opción "Copiar" cuando aparezca</li>
+					</ul>
+				<li>
+					Para computadoras de escritorio y portátiles:
+					<ul>
+						<li>Haga clic derecho en el texto del mensaje y luego haga clic en "Seleccionar todo"</li>
+						<li>Haga clic derecho en el texto resaltado y luego haga clic en "Copiar"</li>
+						<li>Presione Ctrl + C</li>
+					</ul>
+				</li>
+			</ol>
+		</p>
+		<p>
+			Para "pegar" el texto:
+			<ol>
+				<li>
+					Para todos:
+					<ul>
+						<li>Abra su programa de correo electrónico favorito</li>
+						<li>Comience un nuevo mensaje de correo electrónico</li>
+						<li>"Pegar" el texto copiado en el cuerpo</li>
+					</ul>
+				</li>
+				<li>Enviarlo a la persona de contacto</li>
+				<li>Con esto terminas!</li>
+			</ol>
+		</p>
+		<p>Nota: El enlace de correo electrónico incrustado "ACTS Retreat" al hacer clic debería abrir el programa de correo electrónico automáticamente y debería tener el nombre completo de los participantes en la línea de asunto.</p>
+		<p>Gracias y que Dios te bendiga.</p>
+	</div>
+	<div align="center">
+		<button onclick="location.reload()">&emsp;CERRAR&emsp;</button><br />
+	</div>
+</div>
+<!--  END SPANISH HELP SCREEN  -->
+
+<!--  BEGIN VERSION REPORT  -->
+<br />
+<div id="VERSION"></div>
+<!--  END VERSION REPORT  -->
+
+</body>
+
+<!--  BEGIN JAVASCRIPT  -->
+<script src="mgn.js" type="text/javascript" charset="UTF-8"></script>
+<!--  END JAVASCRIPT  -->
+
+</html>
