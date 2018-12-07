@@ -2,29 +2,26 @@
 <html>
 <head>
 <title id="MYTITLE"></title>
-<meta name="generator" content="Bluefish 2.2.10" >
-<meta name="author" content="J.G. McCracken">
-<meta name="date" content="2018-11-06T01:00:07-0600">
-<meta name="copyright" content="©2010-2018 My Time Machine (MTM), Johnny G. McCracken, All rights reserved.">
-<meta name="keywords" content="">
-<meta name="description" content="A web-based personal project/job time tracking utility">
-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
-<meta http-equiv="content-style-type" content="text/css">
-<meta http-equiv="expires" content="0">
-<meta name="version" content="MY TIME MACHINE v1.4.0-1g" />
+<meta name="author" content="J.G. McCracken" /><meta name="copyright" content="©2010-2018 My Time Machine (MTM), Johnny G. McCracken, All rights reserved." />
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta name="version" content="MY TIME MACHINE v1.4.1-1g" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
 /*<![CDATA[*/
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; box-sizing:border-box; text-align:center;}
 input[type="button"] {width:100%;}
+input[type="button"]#helpme {width:auto;}
 table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
-label {font-size:small;}
-.tablenamecolor {background-color: #000080; color:white; font-weight:bold;}
+input[type="radio"] {margin-top: 1px}
+label {font-weight:bold; font-size:12px; vertical-align:text-top;}
+.tablenamecolor, .closetable {background-color: #000080; color:white; font-weight:bold;}
+
 .subhead {background-color:white; color:black; font-weight:bold}
 .point {cursor:pointer;}
 
@@ -38,8 +35,7 @@ label {font-size:small;}
 }
 .grid-container {
     display: inline-grid;
-    /* Using both col & row */
-    grid-gap: 5px 0px;
+    grid-gap: 5px 0px; /* Using both col & row */
     padding: 0px;
     margin: 0px;
 }
@@ -47,24 +43,23 @@ label {font-size:small;}
 .grid-item {
     width:100%;
     height:100%;
-    background-color: none;
     color:black;
     border: 2px solid white;
     padding: 5px;
     font-size: 12pt;
     text-align: center;
     white-space: nowrap;
-    vertical-align: top;
+    vertical-align: middle;
 }
 .grid-item:hover {
     border: 2px solid yellow;
     background-color: navy;
     color:yellow;
 }
-
+#mincrements {float:left; font-weight:bold; color:navy;}
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:12pt; font-weight:bold;}
-#stable {width:auto; margin:auto;}
+#stable {width:auto; margin:auto; margin-bottom:75px;}
 #VERSION {text-align:center; font-size:12px; font-weight:bold; padding:10px;}
 
 @media print{
@@ -75,69 +70,67 @@ label {font-size:small;}
     tr {page-break-inside:avoid;}
     #VERSION {display:none;}
     .tablenamecolor {background-color: white; color:black;}
+    .closetable {background-color: white; color:white;}
     .description {width:400px;}
-    .grid-container, div.foot {display:none;}
+    .grid-container, a.help, div.foot {display:none;}
 }
 /*]]>*/
 </style>
 
 </head>
 
-<body onload="getTotalTime();">
+<body id="bod" onload="getTotalTime();">
 
-<!-- TODO: code for fixed menu bar here -->
+<!-- TODO: Possible location for fixed menu bar -->
 
 <div class="grid-container">
     <div class="grid-item">
         <b>Start Time</b><br />
-        <input id="startTime" type="time" value="08:00" onchange="getTotalTime();" />
+        <input id="startTime" type="time" value="" onchange="getTotalTime();" />
     </div>
+
     <div class="grid-item">
         <b>Hours</b><br />
-        <b><span id="total">9</span></b>
+        <b><span id="total">0.0</span></b>
     </div>
+
     <div class="grid-item">
         <b>Stop Time</b><br />
-        <input id="stopTime" type="time" value="17:00" onchange="getTotalTime();" />
+        <input id="stopTime" type="time" value="" onchange="getTotalTime();" />
     </div>
+
     <div class="grid-item">
-        <!--b></b><br /-->
-        <input type="button" value="Add Table" onclick="addTimeTable(); this.blur();" />
+        <b>Date/Name</b><br />
+        <input type="radio" name="dateformat" id="dateformat1" value="true"  title="Long date name"  onclick="today=d.toDateString()" checked /><label for="dateformat1" title="Long date name" >Long&thinsp;</label><br />
+        <input type="radio" name="dateformat" id="dateformat2" value="false" title="Short date name" onclick="today=d.toLocaleDateString()"   /><label for="dateformat2" title="Short date name">Short</label>
     </div>
+
     <div class="grid-item">
-        <!--b></b><br /-->
-        <div style="text-align:left;">
-            <label><input type="radio" name="dateformat" id="dateformat" value="true" onclick="today=d.toDateString()" checked />Long Name</label><br />
-            <label><input type="radio" name="dateformat" value="false" onclick="today=d.toLocaleDateString()" />Short Name</label>
-        </div>
+        <b>Add</b><br />
+        <input type="button" value="Table" onclick="addTimeTable(); this.blur();" />
     </div>
+
     <div class="grid-item">
-        <!--b></b><br /-->
-        <input type="button" value="Add Line" onclick="addTimeLine(); this.blur();" />
+        <b>Application</b><br />
+        <input id="helpme" type="button" value="Help" onclick="this.blur(); location.href='help.html'" />
     </div>
 </div>
 
 <div id="stable"></div>
 
-<br>
-<br>
-
-<!--  ***BEGIN VERSIONING  -->
+<!--  *** Begin versioning ***  -->
 <div class="foot"><p id="VERSION"></p></div>
-<!--  ***END VERSIONING  -->
+<!--  *** End versioning ***  -->
 
 </body>
 
 <script type="text/javascript" charset="UTF-8">
 "use strict";
 
-/* DATE FOR TIME TABLE NAMES */
+/* Date object for time table names */
 var d=new Date();
 var dateFormat="";
 var today="";
-
-/* Name of currrent table having focus */
-var curTable="";
 
 /* References to <input type="time"> controls */
 var time1=document.getElementById("startTime");
@@ -152,37 +145,47 @@ var stable=document.getElementById("stable");
 /*
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
-
 function setTimeInputs()
 {
     var d=new Date();
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
-    x2.value=x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
-    x2.stepUp(60);
-    function addZero(i)
-    {
-        if (i<10){i="0"+i;}
-        return i;
-    }
-     getTotalTime();
+    x2.value=x1.value=addLeadZero(d.getHours())+":"+addLeadZero(d.getMinutes());
+    x2.stepUp(2);
+    
+    /* Add a leading zero */
+    function addLeadZero(num) {if (num<10){num="0"+num;} return num;}
+    getTotalTime();
 }
 
-/* CALCULATE TOTAL HOURS FOR A ROW */
+/* Calculate total hours for a row */
 function adjTimeLine(e)
 {
     var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
+
     var c2=table.rows[e.parentNode.rowIndex].cells[2];
     var c3=table.rows[e.parentNode.rowIndex].cells[3];
     var c4=table.rows[e.parentNode.rowIndex].cells[4];
+
     updateCells();
     var t1=c2.innerHTML.split(":");
     var t2=c3.innerHTML.split(":");
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
-    c4.innerHTML = (parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1);
-    sumTableHoursCol();
+
+    var result="";
+    if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60))).toFixed(1);}
+    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60))).toFixed(1));}
+    else {result="0.0";}
+    
+    c4.innerHTML=result;
+
+    decimaltime.innerHTML=result;
+    
+    sumTableHoursCol(table.id);
+    
     return;
+    
     function updateCells()
     {
         if (e.cellIndex==2) {c2.innerHTML=time1.value; c3.innerHTML=time2.value;}
@@ -190,10 +193,11 @@ function adjTimeLine(e)
     }
 }
 
-/* SUM TOTAL OF COLUMN "HRS." */
-function sumTableHoursCol()
+
+/* Sum total of column "HRS" */
+function sumTableHoursCol(e)
 {
-    var table=document.getElementById(curTable);
+    var table=document.getElementById(e);
     var f=document.getElementById(table.id+"_footer");
     var total=0;
     var tds=table.getElementsByClassName("totalhours");
@@ -201,69 +205,68 @@ function sumTableHoursCol()
     f.innerHTML="<b>"+total.toFixed(1)+"</b>";
 }
 
-/* GET DATE FOR TIME TABLE */
+/* Get date for time table */
 function getDateForTableName()
 {
   /*
-   * DATE FORMATS FOR TABLE NAME:
-   * 0 = full (Weekday Month Day Year) default
-   * 1 = short (mm/dd/YYYY)
-   * NOTE: Incorporate with localStorage.methods()
+   * Date formats for table name:
+   * 0 = Weekday Month Day Year (default)
+   * 1 = short mm/dd/YYYY
+   * Note: Incorporate with localStorage.methods()
    */
-  var radio=document.getElementById("dateformat");
+  var radio=document.getElementById("dateformat1");
   dateFormat=radio.checked?0:1;
   today=dateFormat?d.toLocaleDateString():d.toDateString();
 }
 
-/* ADD NEW TIME TABLE */
+/* Add new time table */
 function addTimeTable()
 {
     /* Prompt for Table name */
     var tablename=prompt("Enter a name for the new table.",today);
-    if (!tablename) {curTable="Table"+getTableCount()+1; return} else {curTable=tablename;}
+    if (!tablename) {return}
 
     /* Create a Table */
     var table=document.createElement("TABLE");
     table.setAttribute("cellspacing","0");
     table.setAttribute("cellpadding","5");
-    table.id=curTable="Table_"+(getTableCount()+1);
-    table.style.padding="auto";
+    table.id="Table_"+(getTableCount()+1);
     table.style.margin="auto";
-    table.style.marginTop="1.5em";
+    table.style.marginTop="0.5em";
     table.style.marginBottom="1.5em";
-    table.onfocus="curTable=this.id";
-    table.onclick=function(){curTable=this.id;}
-    table.ontouchstart=function(){curTable=this.id;}
     stable.appendChild(table);
 
     /* Table name header row */
     var row=table.insertRow(0);
 
-    /* Add 1st cell to the row, and heavy white checkmark (✔) to it's innerHTML */
-    var th=row.insertCell(0);
-    th.className="tablenamecolor point";
-    th.style.fontSize="14pt"
-    th.style.width="0.5cm";
-    th.style.color="white";
-    th.onclick=function(){deleteMyTable(this);}
-    th.innerHTML="&#10003;";
-
     /* Table name header cell */
-    th=row.insertCell(1);
+    th=row.insertCell(0);
     th.className="tablenamecolor point";
     th.setAttribute("colspan","4");
+    th.style.borderRight="none";
     th.ondblclick=function(){this.innerHTML=prompt("Enter a Name",this.innerHTML);}
     th.innerHTML=tablename;
 
+    /* Add 2nd cell to the row, and heavy white ✖ to it's innerHTML */
+    var th=row.insertCell(1);
+    th.className="tablenamecolor point";
+    th.style.fontSize="16pt"
+    th.style.color="white";
+    th.style.borderLeft="none";
+    th.onclick=function(){removeTimeTable(table.id);}
+    th.innerHTML="&#10006;";
+    
     /* Column headers row */
     row=table.insertRow(1);
-
-    /* Cell 0 gets one of these: ? | ☧ &#9767; | ☺ &#9786; | &#128522; */
+    
+    /* Cell 0 gets ➕ &#10133; */
     var td0=row.insertCell(0);
+    td0.className="point";
     td0.style.fontSize="12pt";
     td0.style.width="0.5cm";
     td0.style.color="blue";
-    td0.innerHTML='<a style="font-weight:bold; text-decoration:none;" href="help.html" target="_blank">&nbsp;?&nbsp;</a>';
+    td0.onclick=function(){addTimeLine(this);}
+    td0.innerHTML='&#10133;';
 
     /* Description */
     var td1=row.insertCell(1);
@@ -291,7 +294,7 @@ function addTimeTable()
     td4.className="subhead";
     td4.style.width="1.0cm";
     td4.style.textAlign="center";
-    td4.innerHTML="Hrs.";
+    td4.innerHTML="Hrs";
 
     /* Footer "Total: Hours" row */
     var footer=table.createTFoot();
@@ -299,48 +302,57 @@ function addTimeTable()
 
     /* Cell0 for "Total:" label */
     var cell0=row.insertCell(0);
-    cell0.className="footer";
-    cell0.setAttribute("colspan","4");
-    cell0.style.textAlign="right";
+    cell0.setAttribute("colspan","3");
+    cell0.style.fontWeight="bold";
+    cell0.style.color="navy";
+    cell0.style.textAlign="left";
     cell0.style.borderRight="none";
-    //cell0.innerHTML='<a style="float:left; font-weight:bold; text-decoration:none;" href="mailto:j.g.mccracken65%40gmail.com?body=Greetings,%20&subject=MTM%20v1.4">&#9993;</a><b>Total: </b>';
-    cell0.innerHTML='<b>Total: </b>';
 
-    /* Cell1 for calculated "Total" hours */
+    /* Interval indicator */
+    cell0.setAttribute("id", table.id+"_info");
+    cell0.innerHTML="";
+
+    /* Cell1 for label "Total" */
     var cell1=row.insertCell(1);
-    cell0.className="footer";
     cell1.style.textAlign="right";
-    cell1.style.paddingRight="5px";
     cell1.style.borderLeft="none";
-    cell1.setAttribute("id", table.id+"_footer");
+    cell1.style.borderRight="none";
+    cell1.innerHTML='<b>Total: </b>';
 
-    /* Add 1st record/line to the table */
-    addTimeLine();
+    /* Cell2 for calculated hours */
+    var cell2=row.insertCell(2);
+    cell2.style.textAlign="right";
+    cell2.style.paddingRight="5px";
+    cell2.style.borderLeft="none";
+    cell2.setAttribute("id", table.id+"_footer");
 }
 
-/* ADD NEW ROW TO SELECTED TIME TABLE */
-function addTimeLine(ndx)
+/* Add new row to selected time table */
+function addTimeLine(e)
 {
     /* Reference to the current table */
-    var table=document.getElementById(curTable);
+    var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
 
     /* Variable "rc" for row count */
-    var rc=getRowCount()+1;
+    var rc=table.rows.length+1;
 
     /* Variable for new data row */
     var row="";
 
-    /* If no arguments are passed */
-    if(arguments.length==0)
+    /* Alias the index of the selected row */
+    var n=e.parentNode.rowIndex;
+
+    /* If the plus sign in row 1 of the table is clicked */
+    if(n==1)
     {
-        /* Insert new data row at top */
+        /* Insert new row at top of table */
         row=table.insertRow(2);
     }
     /* Otherwise */
     else
     {
-        /* Insert it below the selected row */
-        row=table.insertRow(ndx);
+        /* Insert new row below the double clicked "Hrs" cell */
+        row=table.insertRow((n+1));
     }
 
     setTimeInputs();
@@ -350,28 +362,28 @@ function addTimeLine(ndx)
     td0.className="point";
     td0.style.fontSize="14pt";
     td0.style.color="black";
-    td0.onclick=function(){deleteMyRow(this);}
+    td0.onclick=function(){removeTimeLine(this); sumTableHoursCol(table.id)}
     td0.innerHTML="&#10003;";
 
     /* Description cell */
     var td1=row.insertCell(1);
     td1.className="description point";
     td1.style.textAlign="left";
-    td1.ondblclick=function(){this.innerHTML=prompt("Enter description",this.innerHTML);}
+    td1.ondblclick=function(){this.innerHTML=prompt("Enter description",this.innerHTML)}
     td1.innerHTML="Job #" + (rc-3);
 
     /* Start time cell */
     var td2=row.insertCell(2);
     td2.className="point";
     td2.style.textAlign="center";
-    td2.ondblclick=function(){adjTimeLine(this);}
+    td2.ondblclick=function(){adjTimeLine(this)}
     td2.innerHTML=time1.value;
 
     /* Stop time cell */
     var td3=row.insertCell(3);
     td3.className="point";
     td3.style.textAlign="center";
-    td3.ondblclick=function(){adjTimeLine(this);}
+    td3.ondblclick=function(){adjTimeLine(this)}
     td3.innerHTML=time2.value;
 
     /* Hrs & 10ths cell */
@@ -379,25 +391,15 @@ function addTimeLine(ndx)
     td4.className="totalhours point";
     td4.style.textAlign="right";
     td4.style.paddingRight="5px";
-    td4.ondblclick=function(){insertRowBelow(this);}
+    td4.ondblclick=function(){addTimeLine(this)}
     td4.innerHTML=decimaltime.innerHTML;
 
     /* Calculate & update "Total" */
-    sumTableHoursCol();
-}
-
-/* Insert row below the selected row index */
-function insertRowBelow(e)
-{
-    curTable=e.parentNode.parentNode.parentNode.id;
-    var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    var n=e.parentNode.rowIndex;
-    addTimeLine(n+1);
+    sumTableHoursCol(table.id);
 }
 
 /*
- * Calculate total time spent in hours & tenths of
- * an hour & report result.
+ * Calculate total time spent in hours & tenths of an hour.
  */
 function getTotalTime()
 {
@@ -409,29 +411,30 @@ function getTotalTime()
     var t1=time1.value.split(":");
     var t2=time2.value.split(":");
 
-    /* Alias <p> tag */
-    var p=document.getElementById("total");
-
     /* Alias' to hold strings converted to Number() for calculations */
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
-    var result=(parseInt((m2-m1)/60) + getTenths((m2-m1)%60)).toFixed(1);
+    
+    var result="";
+    if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60))).toFixed(1);}
+    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60))).toFixed(1));}
+    else {result="0.0";}
 
     /* Displays calculated result in the <p> tag */
-    p.innerHTML=result;
+    decimaltime.innerHTML=result;
 
     return result;
 }
 
-/*
- * CONVERT MINUTES TO 10ths OF AN HOUR
- * Range 0.0 to 1.0
- * 9 intervals of 5 minutes each
- * 2 intervals of 2 miutes each
- */
-function getTenths(m)
+/* Convert minutes to 10ths of an hour */
+function get10ths(minutes)
 {
+    var m=minutes
     var tenths="";
+
+    /*
+     * Convert 5 minute intervals to 10ths of an hour
+     */
          if (m>=0  && m<=2) {tenths="0.0"}
     else if (m>=3  && m<=8) {tenths="0.1"}
     else if (m>=9  && m<=14){tenths="0.2"}
@@ -442,32 +445,32 @@ function getTenths(m)
     else if (m>=39 && m<=44){tenths="0.7"}
     else if (m>=45 && m<=50){tenths="0.8"}
     else if (m>=51 && m<=56){tenths="0.9"}
-    else if (m>=57 && m<=59){tenths="1.0"}
+    else if (m>=57) {tenths="1.0"}
     return Number(tenths);
 }
 
-/* DELETE TABLE */
-function deleteMyTable(e) {var child=document.getElementById(e.parentNode.parentNode.parentNode.id); stable.removeChild(child); }
+/* Delete Table */
+function removeTimeTable(tname) {stable.removeChild(document.getElementById(tname));}
 
-/* DELETE ROW */
-function deleteMyRow(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex); sumTableHoursCol(); }
+/* Delete Row */
+function removeTimeLine(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex);}
 
-/* RETURN VISIBLE TABLES COUNT */
+/* Return visible tables count */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
 
-/* RETURN ROW COUNT IN CURRENT TABLE */
-function getRowCount(){return document.getElementById(curTable).rows.length;}
-
-/* DISPLAY VERSION NUMBER */
+/* Display version number */
 function setVersion()
 {
     var ver=document.querySelector('meta[name="version"]').content;
     var author=document.querySelector('meta[name="author"]').content;
     document.getElementById("MYTITLE").innerHTML=ver;
-    document.getElementById("VERSION").innerHTML=ver + "<br />&copy;2010, 2018, "+author;
+    document.getElementById("VERSION").innerHTML=ver + "<br />Author: "+author;
 }
+
 setVersion();
+
 getDateForTableName();
+
 </script>
 
 </html>
