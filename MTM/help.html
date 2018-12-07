@@ -16,10 +16,13 @@
 <style>
 /*<![CDATA[*/
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; box-sizing:border-box; text-align:left;}
-body {padding:10px; font-size:10pt;}
-h3,p {padding:5px;}
-i {color:blue;}
-small {font-size:10px;}
+body {padding: 10px;}
+input[type="button"]{height:auto; width:auto;}
+p {font-size:12pt;}
+h3, p, ol, ul {margin-top:0.5em;}
+li {padding-bottom:0.5em;}
+navy {color:navy; font-weight:600;}
+ol ul {padding-left:0px;}
 /*]]>*/
 </style>
 
@@ -27,60 +30,74 @@ small {font-size:10px;}
 
 <body>
     <h1>Editing Time Tables</h1>
+
+    <p><small>Best viewed in Firefox, Chrome, etc.</small></p>
+
+    <h3>Creating &amp; Deleting Time Tables</h3>
     <p>
-        <small>
-            Best viewed in Firefox, Chrome, etc.
-        </small>
-    </p>
-    <p>
-        <b>Creating / Deleting Time Tables</b><br>
-        <i>Click</i> the <button>Table</button> button to create a new table. When the dialog opens give it a name. <i>Note:</i>
-        A table must have a name before it can be created.
-    </p>
-    <p>
-        <i>IMPORTANT!</i> Multiple tables can be created, however, a table must have focus
-        before lines can be added to it or deleted from it.
-    </p>
-    <p>
-        The default name for new tables will be in one of the following formats:
+        <b>To Create a Time Table...</b>
         <ol>
-            <li>Long name: <i>Wed Nov 21 2018</i> (default)</li>
-            <li>Short name: <i>11/21/2018</i></li>
+            <li>Under the <navy>"Date/Name"</navy> heading, choose the date name style that will appear in the table header.
+                <ul style="list-style-type: none;">
+                    <li><input type="radio" name="r1" checked />Long date (<i>Wed Nov 21 2018 default</i>)</li>
+                    <li><input type="radio" name="r1" />Short date (<i>11/21/2018</i>)</li>
+                </ul>
+                <navy>Note:</navy> Tables can not be created without names!
+            </li>
+            <li><i>Click</i> the <input type="button" value="Table" /> button to continue.</li>
+            <li>A <i>dialog box</i> will open allowing the user to modify the name of the table.</li>
+            <li><i>Click</i> <navy>"OK"</navy> to create the table.</li>
         </ol>
     </p>
-    <p>
-        <i>Double click</i> the table name to open a dialog box that allows user input to modify the text.
-    </p>
-    <p>
-        <b>Adding / Deleting Tables & Time Lines</b><br>
-        <i>Click</i> the <button>Line</button> button to create a new line in the table that has focus.
-        The new line will contain the current time in the "Start" cell.
-        The "Stop" cell will contain the current time +1 hour.
-    </p>
-    <p>
-        <i>Click</i> the checkmark at the upper left corner of a table to delete it.
-    </p>
-    <p>
-        <i>Click</i> the checkmark at the left of a row to delete it.
-    </p>
-    <p>
-        <b>Inserting Time Lines</b><br>
-        <i>Double click</i> any "Hrs" cell to insert a new row below the row of the clicked cell.
-    </p>
-    <p>
-        <b>Editing Time Lines</b><br>
-        <i>Double click</i> any "Description" cell to open a dialog box that allows user input.
-    </p>
-    <p>
-        <i>Double click</i> a "Start" cell to insert the current values of both time fields into both the "Start" & "Stop" cells.
-    </p>
-    <p>
-        <i>Double click</i> a "Stop" cell to insert the current value of the "Stop" time field.
-    </p>
-    <!--p>
-        <i>Click</i> the envelope in the bottom left of the footer to email the author.
-    </p-->
 
-</script>
+    <p>
+        <b>To Modify a Table's Name after Creation...</b>
+        <ol>
+            <li><i>Double click</i> the table's <navy>"Name"</navy></li>
+
+            <li>A <i>dialog box</i> will open allowing user to modify the table's name.</li>
+
+            <li><i>Click</i> <navy>"OK"</navy> to continue.</li>
+        </ol>
+    </p>
+
+    <p>
+        <b>To Remove a Time Table...</b>
+        <ol>
+            <li><i>Click</i> the &#10006; in the upper right corner.</li>
+        </ol>
+    </p>
+
+    <h3>Adding, Inserting &amp; Deleting Time Lines</h3>
+    <p>
+        <navy>Note:</navy> All new lines added or inserted will display the current time in the <navy>"Start"</navy> cell,
+        and the current time plus 2 minutes in the <navy>"Stop"</navy> cell.</i>
+    </p>
+
+    <p>
+        <b>To add a Time line at the top of a table...</b>
+        <ol>
+            <li><i>Click</i> the <b>&#10133;</b> symbol to the left of the <b>"Description"</b> column header.</li>
+            <li>Modify as needed.</li>
+        </ol>
+    </p>
+
+    <p>
+        <b>To insert a new line under an existing line...</b>
+        <ol>
+            <li><i>Double click</i> any <navy>"Hrs"</navy> cell to insert a new time line below the level of the clicked cell.</li>
+            <li>Modify as needed.</li>
+        </ol>
+    </p>
+
+    <p>
+        <b>To delete a Time line from a table...</b>
+        <ol><li>Click the checkmark (<b>&#10003;</b>) at the left of any time line to delete it.</li></ol>
+    </p>
+
+    <h3>Editing Time Lines</h3>
+    <p><i>Double click</i> any <navy>"Description"</navy> cell to open a <i>dialog box</i> that allows user input.</p>
+    <p><i>Double click</i> any <navy>"Start"</navy> cell to insert the current values of the <navy>"Start Time"</navy> and <navy>"Stop Time"</navy> fields into their coresponding cells.</p>
+    <p><i>Double click</i> any <navy>"Stop"</navy> cell to insert the current value of the <navy>"Stop Time"</navy> field into it.<br /><br /></p>
 
 </html>
