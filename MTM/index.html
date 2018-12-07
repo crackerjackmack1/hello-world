@@ -14,6 +14,7 @@
 /*<![CDATA[*/
 html * {font-family:Arial, Helvetica, sans-serif, monospace; width:auto; margin:auto; box-sizing:border-box; text-align:center;}
 input[type="button"] {width:100%;}
+input[type="button"]#helpme {width:auto;}
 table {border:1px solid black; width:95%;}
 td {font-size:12pt; vertical-align:middle; text-align:center; border:1px solid gray; border-collapse:collapse;}
 td.totalhours:hover{background-color:yellow;}
@@ -56,7 +57,6 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     color:yellow;
 }
 #mincrements {float:left; font-weight:bold; color:navy;}
-.help {position:fixed; right:0; top:0; width:auto; background-color:ccc; color:blue; text-align:center; border:1px solid blue; text-decoration:none; margin:3px;}
 .foot {position:fixed; left:0; bottom:0; width:100%; background-color:#000080; color:white; text-align:center;}
 #total {font-size:12pt; font-weight:bold;}
 #stable {width:auto; margin:auto; margin-bottom:75px;}
@@ -81,9 +81,7 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
 <body id="bod" onload="getTotalTime();">
 
-<!-- TODO: code for fixed menu bar here -->
-
-<a class="help point" href='help.html'>&nbsp;?&nbsp;</a>
+<!-- TODO: Possible location for fixed menu bar -->
 
 <div class="grid-container">
     <div class="grid-item">
@@ -113,24 +111,23 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     </div>
 
     <div class="grid-item">
-        <b>Intervals</b><br />
-        <input type="radio" name="increments" id="increments5" title="5 minute intervals" checked /><label for="increments5" title="5 minute intervals">5 min</label><br />
-        <input type="radio" name="increments" id="increments6" title="6 minute intervals" /><label for="increments6" title="6 minute intervals">6 min</label>
+        <b>Application</b><br />
+        <input id="helpme" type="button" value="Help" onclick="this.blur(); location.href='help.html'" />
     </div>
 </div>
 
 <div id="stable"></div>
 
-<!--  ***BEGIN VERSIONING  -->
+<!--  *** Begin versioning ***  -->
 <div class="foot"><p id="VERSION"></p></div>
-<!--  ***END VERSIONING  -->
+<!--  *** End versioning ***  -->
 
 </body>
 
 <script type="text/javascript" charset="UTF-8">
 "use strict";
 
-/* DATE FOR TIME TABLE NAMES */
+/* Date object for time table names */
 var d=new Date();
 var dateFormat="";
 var today="";
@@ -148,29 +145,23 @@ var stable=document.getElementById("stable");
 /*
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
-
-function setTimeInputs(e)
+function setTimeInputs()
 {
-    var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    var mode=table.id.substr(0,2);
     var d=new Date();
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
-    x2.value=x1.value=addZero(d.getHours())+":"+addZero(d.getMinutes());
+    x2.value=x1.value=addLeadZero(d.getHours())+":"+addLeadZero(d.getMinutes());
     x2.stepUp(2);
-    function addZero(i)
-    {
-        if (i<10){i="0"+i;}
-        return i;
-    }
-    getTotalTime(mode);
+    
+    /* Add a leading zero */
+    function addLeadZero(num) {if (num<10){num="0"+num;} return num;}
+    getTotalTime();
 }
 
-/* CALCULATE TOTAL HOURS FOR A ROW */
+/* Calculate total hours for a row */
 function adjTimeLine(e)
 {
     var table=document.getElementById(e.parentNode.parentNode.parentNode.id);
-    var mode=table.id.substr(0,2);
 
     var c2=table.rows[e.parentNode.rowIndex].cells[2];
     var c3=table.rows[e.parentNode.rowIndex].cells[3];
@@ -182,10 +173,9 @@ function adjTimeLine(e)
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
 
-    //TODO: Fix this and the other one too @432
     var result="";
-    if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
-    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1));}
+    if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60))).toFixed(1);}
+    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60))).toFixed(1));}
     else {result="0.0";}
     
     c4.innerHTML=result;
@@ -204,7 +194,7 @@ function adjTimeLine(e)
 }
 
 
-/* SUM TOTAL OF COLUMN "HRS" */
+/* Sum total of column "HRS" */
 function sumTableHoursCol(e)
 {
     var table=document.getElementById(e);
@@ -215,26 +205,23 @@ function sumTableHoursCol(e)
     f.innerHTML="<b>"+total.toFixed(1)+"</b>";
 }
 
-/* GET DATE FOR TIME TABLE */
+/* Get date for time table */
 function getDateForTableName()
 {
   /*
-   * DATE FORMATS FOR TABLE NAME:
+   * Date formats for table name:
    * 0 = Weekday Month Day Year (default)
    * 1 = short mm/dd/YYYY
-   * NOTE: Incorporate with localStorage.methods()
+   * Note: Incorporate with localStorage.methods()
    */
   var radio=document.getElementById("dateformat1");
   dateFormat=radio.checked?0:1;
   today=dateFormat?d.toLocaleDateString():d.toDateString();
 }
 
-/* ADD NEW TIME TABLE */
+/* Add new time table */
 function addTimeTable()
 {
-    /* First part of table id is the miniute increment */
-    var inc=document.getElementById("increments5").checked?"5M":"6M";
-    
     /* Prompt for Table name */
     var tablename=prompt("Enter a name for the new table.",today);
     if (!tablename) {return}
@@ -243,7 +230,7 @@ function addTimeTable()
     var table=document.createElement("TABLE");
     table.setAttribute("cellspacing","0");
     table.setAttribute("cellpadding","5");
-    table.id=inc + "_Table_"+(getTableCount()+1);
+    table.id="Table_"+(getTableCount()+1);
     table.style.margin="auto";
     table.style.marginTop="0.5em";
     table.style.marginBottom="1.5em";
@@ -307,7 +294,7 @@ function addTimeTable()
     td4.className="subhead";
     td4.style.width="1.0cm";
     td4.style.textAlign="center";
-    td4.innerHTML="Hrs.";
+    td4.innerHTML="Hrs";
 
     /* Footer "Total: Hours" row */
     var footer=table.createTFoot();
@@ -323,7 +310,7 @@ function addTimeTable()
 
     /* Interval indicator */
     cell0.setAttribute("id", table.id+"_info");
-    cell0.innerHTML=inc;
+    cell0.innerHTML="";
 
     /* Cell1 for label "Total" */
     var cell1=row.insertCell(1);
@@ -340,7 +327,7 @@ function addTimeTable()
     cell2.setAttribute("id", table.id+"_footer");
 }
 
-/* ADD NEW ROW TO SELECTED TIME TABLE */
+/* Add new row to selected time table */
 function addTimeLine(e)
 {
     /* Reference to the current table */
@@ -368,7 +355,7 @@ function addTimeLine(e)
         row=table.insertRow((n+1));
     }
 
-    setTimeInputs(e);
+    setTimeInputs();
 
     /* Insert a cell0 & add a checkmark (✔) to it */
     var td0=row.insertCell(0);
@@ -414,7 +401,7 @@ function addTimeLine(e)
 /*
  * Calculate total time spent in hours & tenths of an hour.
  */
-function getTotalTime(mode)
+function getTotalTime()
 {
     /*
      * Reference the "time" <input> elements and split them into string arrays
@@ -428,10 +415,9 @@ function getTotalTime(mode)
     var m1=Number(t1[0] * 60) + Number(t1[1]);
     var m2=Number(t2[0] * 60) + Number(t2[1]);
     
-    //TODO: Fix this and the other one too @ 185
     var result="";
-    if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1);}
-    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60),mode)).toFixed(1));}
+    if (m2>m1) {result=(parseInt((m2-m1)/60) + get10ths(((m2-m1)%60))).toFixed(1);}
+    else if (m1>m2) {result=Math.abs((parseInt((m1-m2)/60) + get10ths(((m2-m1)%60))).toFixed(1));}
     else {result="0.0";}
 
     /* Displays calculated result in the <p> tag */
@@ -440,60 +426,39 @@ function getTotalTime(mode)
     return result;
 }
 
-/* CONVERT MINUTES TO 10ths OF AN HOUR */
-function get10ths(minutes,mode)
+/* Convert minutes to 10ths of an hour */
+function get10ths(minutes)
 {
     var m=minutes
     var tenths="";
-    
+
     /*
-     * CONVERT 5 MINUTE INTERVALS TO 10ths OF AN HOUR
+     * Convert 5 minute intervals to 10ths of an hour
      */
-    if(mode=="5M")
-    {
-             if (m>=0  && m<=2) {tenths="0.0"}
-        else if (m>=3  && m<=8) {tenths="0.1"}
-        else if (m>=9  && m<=14){tenths="0.2"}
-        else if (m>=15 && m<=20){tenths="0.3"}
-        else if (m>=21 && m<=26){tenths="0.4"}
-        else if (m>=27 && m<=32){tenths="0.5"}
-        else if (m>=33 && m<=38){tenths="0.6"}
-        else if (m>=39 && m<=44){tenths="0.7"}
-        else if (m>=45 && m<=50){tenths="0.8"}
-        else if (m>=51 && m<=56){tenths="0.9"}
-        else if (m>=57) {tenths="1.0"}
-    }
-    
-    /*
-     * CONVERT 6 MINUTE INTERVALS TO 10ths OF AN HOUR
-     */
-    else if(mode=="6M")
-    {
-             if (m==0) {tenths="0.0"}
-        else if (m>0  && m<=6) {tenths="0.1"}
-        else if (m>6  && m<=12){tenths="0.2"}
-        else if (m>12 && m<=18){tenths="0.3"}
-        else if (m>18 && m<=24){tenths="0.4"}
-        else if (m>24 && m<=30){tenths="0.5"}
-        else if (m>30 && m<=36){tenths="0.6"}
-        else if (m>36 && m<=42){tenths="0.7"}
-        else if (m>42 && m<=48){tenths="0.8"}
-        else if (m>48 && m<=54){tenths="0.9"}
-        else if (m>54) {tenths="1.0"}
-    }
+         if (m>=0  && m<=2) {tenths="0.0"}
+    else if (m>=3  && m<=8) {tenths="0.1"}
+    else if (m>=9  && m<=14){tenths="0.2"}
+    else if (m>=15 && m<=20){tenths="0.3"}
+    else if (m>=21 && m<=26){tenths="0.4"}
+    else if (m>=27 && m<=32){tenths="0.5"}
+    else if (m>=33 && m<=38){tenths="0.6"}
+    else if (m>=39 && m<=44){tenths="0.7"}
+    else if (m>=45 && m<=50){tenths="0.8"}
+    else if (m>=51 && m<=56){tenths="0.9"}
+    else if (m>=57) {tenths="1.0"}
     return Number(tenths);
 }
 
-/* DELETE TABLE */
+/* Delete Table */
 function removeTimeTable(tname) {stable.removeChild(document.getElementById(tname));}
 
-/* DELETE ROW */
+/* Delete Row */
 function removeTimeLine(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex);}
 
-/* RETURN VISIBLE TABLES COUNT */
+/* Return visible tables count */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
 
-/* DISPLAY VERSION NUMBER */
+/* Display version number */
 function setVersion()
 {
     var ver=document.querySelector('meta[name="version"]').content;
