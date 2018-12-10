@@ -100,6 +100,11 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     </div>
 
     <div class="grid-item">
+        <b>Application</b><br />
+        <input type="button" value="Help" onclick='window.open("help.html","_blank","","false")' />
+    </div>
+
+    <div class="grid-item">
         <b>Date/Name</b><br />
         <input type="radio" name="dateformat" id="dateformat1" value="true"  title="Long date name"  onclick="today=d.toDateString()" checked /><label for="dateformat1" title="Long date name" >Long&thinsp;</label><br />
         <input type="radio" name="dateformat" id="dateformat2" value="false" title="Short date name" onclick="today=d.toLocaleDateString()"   /><label for="dateformat2" title="Short date name">Short</label>
@@ -108,11 +113,6 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
     <div class="grid-item">
         <b>Add</b><br />
         <input type="button" value="Table" onclick="addTimeTable(); this.blur();" />
-    </div>
-
-    <div class="grid-item">
-        <b>Application</b><br />
-        <input type="button" value="Help" onclick='window.open("help.html","_blank","","false")' />
     </div>
 </div>
 
