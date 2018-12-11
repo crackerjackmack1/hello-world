@@ -432,7 +432,7 @@ function get10ths(minutes)
 {
     var m=minutes
     var tenths="";
-
+    if (m < 0){m*=-1}
     /*
      * Convert 5 minute intervals to 10ths of an hour
      */
