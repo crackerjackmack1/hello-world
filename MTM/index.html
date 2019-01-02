@@ -81,7 +81,9 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
 <body id="bod" onload="getTotalTime();">
 
-<!-- TODO: Possible location for fixed menu bar -->
+<!-- TODO: Possible fixed menu bar location -->
+
+<!--***************************************************************************************-->
 
 <div class="grid-container">
     <div class="grid-item">
@@ -118,9 +120,10 @@ label {font-weight:bold; font-size:12px; vertical-align:text-top;}
 
 <div id="stable"></div>
 
-<!--  *** Begin versioning ***  -->
+
 <div class="foot"><p id="VERSION"></p></div>
-<!--  *** End versioning ***  -->
+
+<!--***************************************************************************************-->
 
 </body>
 
@@ -142,6 +145,8 @@ var decimaltime=document.getElementById("total");
 /* Div where tables are created */
 var stable=document.getElementById("stable");
 
+/***************************************************************************************/
+
 /*
  * TODO: ADD LOCAL STORAGE FOR USER-INFO & DATE PREFERENCES
  */
@@ -156,6 +161,8 @@ function setTimeInputs()
     function addLeadZero(num) {if (num<10){num="0"+num;} return num;}
     getTotalTime();
 }
+
+/***************************************************************************************/
 
 /* Calculate total hours for a row */
 function adjTimeLine(e)
@@ -192,6 +199,7 @@ function adjTimeLine(e)
     }
 }
 
+/***************************************************************************************/
 
 /* Sum total of column "HRS" */
 function sumTableHoursCol(e)
@@ -203,6 +211,8 @@ function sumTableHoursCol(e)
     for (var i=0; i<tds.length; i++) {total+=Number(tds[i].innerHTML);}
     f.innerHTML="<b>"+total.toFixed(1)+"</b>";
 }
+
+/***************************************************************************************/
 
 /* Get date for time table */
 function getDateForTableName()
@@ -217,6 +227,8 @@ function getDateForTableName()
   dateFormat=radio.checked?0:1;
   today=dateFormat?d.toLocaleDateString():d.toDateString();
 }
+
+/***************************************************************************************/
 
 /* Add new time table */
 function addTimeTable()
@@ -326,6 +338,8 @@ function addTimeTable()
     cell2.setAttribute("id", table.id+"_footer");
 }
 
+/***************************************************************************************/
+
 /* Add new row to selected time table */
 function addTimeLine(e)
 {
@@ -397,6 +411,8 @@ function addTimeLine(e)
     sumTableHoursCol(table.id);
 }
 
+/***************************************************************************************/
+
 /*
  * Calculate total time spent in hours & tenths of an hour.
  */
@@ -425,6 +441,8 @@ function getTotalTime()
     return result;
 }
 
+/***************************************************************************************/
+
 /* Convert minutes to 10ths of an hour */
 function get10ths(minutes)
 {
@@ -448,14 +466,22 @@ function get10ths(minutes)
     return Number(tenths);
 }
 
+/***************************************************************************************/
+
 /* Delete Table */
 function removeTimeTable(tname) {stable.removeChild(document.getElementById(tname));}
+
+/***************************************************************************************/
 
 /* Delete Row */
 function removeTimeLine(e) {document.getElementById(e.parentNode.parentNode.parentNode.id).deleteRow(e.parentNode.rowIndex);}
 
+/***************************************************************************************/
+
 /* Return visible tables count */
 function getTableCount() {return document.getElementsByTagName("TABLE").length;}
+
+/***************************************************************************************/
 
 /* Display version number */
 function setVersion()
@@ -465,6 +491,8 @@ function setVersion()
     document.getElementById("MYTITLE").innerHTML=ver;
     document.getElementById("VERSION").innerHTML=ver + "<br />Author: "+author;
 }
+
+/***************************************************************************************/
 
 setVersion();
 
