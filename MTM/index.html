@@ -152,6 +152,7 @@ var stable=document.getElementById("stable");
  */
 function setTimeInputs()
 {
+    var d=new Date();
     var x1=document.getElementById("startTime");
     var x2=document.getElementById("stopTime");
     x2.value=x1.value=addLeadZero(d.getHours())+":"+addLeadZero(d.getMinutes());
@@ -455,7 +456,7 @@ function get10ths(minutes)
 {
     var m=minutes
     var tenths="";
-
+    if (m < 0){m*=-1}
     /*
      * Convert 5 minute intervals to 10ths of an hour
      */
