@@ -52,10 +52,10 @@ Example:
     ["Men","April 26, 2018","EN"]
     ]
 
-Retreat "Dates" must entered in the following format:
+Retreat "Dates" must be entered in the following format:
     
     "Month Day, Year"
-              ⬑Don't forget the comma!
+              ^Don't forget the comma!
 
 Do not forget the comma between the DAY and the YEAR!
 
