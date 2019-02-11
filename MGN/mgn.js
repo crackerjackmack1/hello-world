@@ -93,9 +93,9 @@ function outPutMsg()
     + getMonthName(rdate.getMonth())
     + " "
     + (rdate.getDate()-1)
-    + (!rLang?addDateSuffix(rdate.getDate()):"")+"."
+    + (!rLang?addDateSuffix(rdate.getDate()):"")+". "
     + '<ol style="padding-left:1em; line-height:normal"><li>'
-    + (!rLang?"Write the letter and don&apos;t forget to sign it!":"¡Escriba la carta y no olvide firmarla!")
+    + (!rLang?"Write the letter and don&apos;t forget to sign it!":"¡Escriba la carta y no olvide firmarla! ")
     + "</li><li>"
     if(!rLang)
     {
@@ -107,7 +107,7 @@ function outPutMsg()
     {
         msg+="Coloque la carta en un sobre, escriba el nombre completo de "
         + rfirstname
-        + (rfirstname=="su peregrino" || rfirstname=="su peregrina"?" y séllela.":" y ciérrelo.")
+        + (rfirstname=="su peregrino" || rfirstname=="su peregrina"?" y séllela. ":" y ciérrelo. ")
     }
     msg+="</li><li>"
     + (!rLang?"Mail it in a second envelope to&#58;":"Envíelo por correo en un segundo sobre a:")
