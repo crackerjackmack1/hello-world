@@ -44,7 +44,7 @@ function postNextRetreatDate()
 
     rgender=retreats[i][0].toLowerCase()=="women"?0:1;
     rLang=retreats[i][2].toLowerCase()=="en"?0:1;
-    header.innerHTML=(!rLang?"Message Generator":"Generador de Mensajes");
+    header.innerHTML=(!rLang?"ACTS<br>Message Generator":"ACTS<br>Generador de Mensajes");
     nextdate.innerHTML=(!rLang?((rgender?"Men":"Women")+"&apos;s Retreat Date&#58; "):(rgender?"Fecha de Retiro de Hombres:":"Fecha de Retiro de las Mujeres:"))
     + "<br />"
     + getMonthName(rdate.getMonth())+" "
