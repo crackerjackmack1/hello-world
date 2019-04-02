@@ -36,26 +36,30 @@ small {font-size:10px;}
 }
 
 .catechisms-sections {
+	font-size:10px;
+	text-align:center;
+	grid-gap: 4px;
+	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
 	/* 4 rows */
 	grid-template-rows: auto auto auto auto;
 }
 
 .catechisms-list {
+	font-size:10px;
+	text-align:center;
+	grid-gap: 4px;
+	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
 	/* 11 rows */
 	grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
 }
 
 .catechisms-list-short {
-	/* 8 rows */
-	grid-template-rows: auto auto auto auto auto auto auto auto;
-}
-
-/* 9 columns each */
-.catechisms-sections,.catechisms-list,.catechisms-list-short {
 	font-size:10px;
 	text-align:center;
-	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
 	grid-gap: 4px;
+	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
+	/* 8 rows */
+	grid-template-rows: auto auto auto auto auto auto auto auto;
 }
 
 .to-top {float:right; font-size:10px;}
