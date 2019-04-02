@@ -10,7 +10,7 @@
 <title>Catechism by Paragraphs</title>
 
 <style>
-*html {font-family: Arial, Helvetica, sans-serif; box-sizing:border-box; font-size:70%;}
+* html {font-family: Arial, Helvetica, sans-serif; box-sizing:border-box; font-size:70%;}
 
 body {
 	padding: auto;
@@ -34,26 +34,30 @@ small {font-size:10px;}
 	color:#999999;
 }
 
-/* 9 columns each */
-.sections,.catechisms-list,.catechisms-list-short {
+/* 9 columns */
+.sections {
+	/* 4 rows */
 	text-align:right;
 	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
+	grid-template-rows: auto auto auto auto;
 	grid-gap: .05in;
 }
 
-.sections {
-/* 4 rows */
-	grid-template-rows: auto auto auto auto;
-}
-
+/* 9 columns */
 .catechisms-list {
 	/* 11 rows */
+	text-align:right;
+	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
 	grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
 }
-
+	
+/* 9 columns */
 .catechisms-list-short {
 	/* 8 rows */
+	text-align:right;
+	display: grid; grid-template-columns: .33in .33in .33in .33in .33in .33in .33in .33in .33in;
 	grid-template-rows: auto auto auto auto auto auto auto auto;
+	grid-gap: .05in;
 }
 
 .to-top {float:right; font-size:11px;}
