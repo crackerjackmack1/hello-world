@@ -11,7 +11,7 @@
 var retreats=[
     ["Men","April 23, 2020","EN"],
     ["Women","March 5, 2020","SP"],
-    ["Men","Novemner 21, 2019","SP"],
+    ["Men","November 21, 2019","SP"],
     ["Women","August 1, 2019","EN"],
     ["Men","April 25, 2019","EN"],
     ["Women","February 21, 2019","SP"],
